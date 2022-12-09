@@ -1,0 +1,7 @@
+# Core requirements for using this application
+-c constraints.txt
+
+Django             # Web application framework
+django-model-utils        # Provides TimeStampedModel abstract base class
+git+https://github.com/open-craft/openedx-events.git@68e8b4292fc020a4c7886f16f4701d452a45d06e#egg=openedx_events
+git+https://github.com/openedx/taxonomy-connector.git@725c125057e6b45925f12d0edc68cfb319b3136a#egg=taxonomy-connector
