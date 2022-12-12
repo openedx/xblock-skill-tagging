@@ -7,7 +7,6 @@ from django.conf import settings
 from django.utils.translation import gettext as _
 from openedx_events.learning.data import XBlockSkillVerificationData
 from openedx_events.learning.signals import XBLOCK_SKILL_VERIFIED
-from taxonomy.models import Skill
 from urllib.parse import quote, urljoin
 from xblock.core import XBlock
 from xblock.fields import Boolean, Scope
@@ -62,15 +61,18 @@ class SkillTaggingMixin:
     def verfiy_tags(self, tags):
         usage_key = self.scope_ids.usage_id.__str__()
         verified_skill_ids = []
-        for tag in tags:
-            skills = Skill.objects.filter(name=tag)
-            for skill in skills:
-                verified_skill_ids.append(skill.id)
+        ignored_skill_ids = []
+        skills = self.fetch_tags()
+        for skill in skills:
+            if skill['name'] in tags:
+                verified_skill_ids.append(skill['id'])
+            else:
+                ignored_skill_ids.append(skill['id'])
         XBLOCK_SKILL_VERIFIED.send_event(
             xblock_info=XBlockSkillVerificationData(
                 usage_key=usage_key,
                 verified_skills=verified_skill_ids,
-                ignored_skills=[],
+                ignored_skills=ignored_skill_ids,
             )
         )
         if not self.has_verified_tags:
