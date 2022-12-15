@@ -6,6 +6,7 @@ Django applications, so these settings will not be used.
 """
 
 from os.path import abspath, dirname, join
+from workbench.settings import *
 
 
 def root(*args):
@@ -26,20 +27,12 @@ DATABASES = {
     }
 }
 
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.messages',
-    'django.contrib.sessions',
-    'skill_tagging',
-)
 
 LOCALE_PATHS = [
     root('skill_tagging', 'conf', 'locale'),
 ]
 
-ROOT_URLCONF = 'skill_tagging.urls'
+ROOT_URLCONF = 'test_urls'
 
 SECRET_KEY = 'insecure-secret-key'
 
@@ -59,3 +52,5 @@ TEMPLATES = [{
         ],
     },
 }]
+
+TAXONOMY_API_BASE_URL = 'http://example.com'

@@ -63,8 +63,10 @@ piptools: ## install pinned version of pip-compile and pip-sync
 requirements: piptools ## install development environment requirements
 	pip-sync -q requirements/dev.txt requirements/private.*
 
-test: clean ## run tests in the current virtualenv
-	pytest
+test:  ## Run the tests
+	mkdir -p var
+	rm -rf .coverage
+	python -m coverage run --rcfile=.coveragerc ./test.py --noinput
 
 diff_cover: test ## find diff lines that need test coverage
 	diff-cover coverage.xml

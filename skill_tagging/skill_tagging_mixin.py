@@ -28,8 +28,7 @@ class SkillTaggingMixin:
         scope=Scope.user_state
     )
     
-    @XBlock.json_handler
-    def fetch_tags(self):
+    def _fetch_skill_tags(self):
         if hasattr(settings, 'TAXONOMY_API_BASE_URL'):
             API_BASE_URL = settings.TAXONOMY_API_BASE_URL
         else:
@@ -58,22 +57,26 @@ class SkillTaggingMixin:
         return result['skills']
 
     @XBlock.json_handler
-    def verfiy_tags(self, tags):
+    def fetch_tags(self, data, suffix=''):
+        return self._fetch_skill_tags()
+
+    @XBlock.json_handler
+    def verify_tags(self, tags, suffix=''):
         usage_key = self.scope_ids.usage_id.__str__()
         verified_skill_ids = []
         ignored_skill_ids = []
-        skills = self.fetch_tags()
+        skills = self._fetch_skill_tags()
         for skill in skills:
             if skill['name'] in tags:
                 verified_skill_ids.append(skill['id'])
             else:
                 ignored_skill_ids.append(skill['id'])
-        XBLOCK_SKILL_VERIFIED.send_event(
-            xblock_info=XBlockSkillVerificationData(
-                usage_key=usage_key,
-                verified_skills=verified_skill_ids,
-                ignored_skills=ignored_skill_ids,
-            )
-        )
         if not self.has_verified_tags:
+            XBLOCK_SKILL_VERIFIED.send_event(
+                xblock_info=XBlockSkillVerificationData(
+                    usage_key=usage_key,
+                    verified_skills=verified_skill_ids,
+                    ignored_skills=ignored_skill_ids,
+                )
+            )
             self.has_verified_tags = True
