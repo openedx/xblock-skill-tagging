@@ -24,17 +24,12 @@ class SkillTaggingMixin:
     has_verified_tags = Boolean(
         display_name=_("Has verified tags"),
         default=False,
-        help=_("Xblock has verified tags?"),
+        help=_("Has user verified tags for this XBlock?"),
         scope=Scope.user_state
     )
     
     def _fetch_skill_tags(self):
-        if hasattr(settings, 'TAXONOMY_API_BASE_URL'):
-            API_BASE_URL = settings.TAXONOMY_API_BASE_URL
-        else:
-            API_BASE_URL = None
-
-        if not API_BASE_URL:
+        if not hasattr(settings, 'TAXONOMY_API_BASE_URL'):
             LOGGER.warning("Require TAXONOMY_API_BASE_URL to be present in the settings.")
             return
 
@@ -48,7 +43,7 @@ class SkillTaggingMixin:
 
         usage_id_str = self.scope_ids.usage_id.__str__()
         XBLOCK_SKILL_TAGS_API = urljoin(
-            API_BASE_URL,
+            settings.TAXONOMY_API_BASE_URL,
             '/taxonomy/api/v1/xblocks/?usage_key={}'.format(quote(usage_id_str))
         )
         response = api_client.get(XBLOCK_SKILL_TAGS_API)
@@ -65,13 +60,13 @@ class SkillTaggingMixin:
         usage_key = self.scope_ids.usage_id.__str__()
         verified_skill_ids = []
         ignored_skill_ids = []
-        skills = self._fetch_skill_tags()
-        for skill in skills:
-            if skill['name'] in tags:
-                verified_skill_ids.append(skill['id'])
-            else:
-                ignored_skill_ids.append(skill['id'])
         if not self.has_verified_tags:
+            skills = self._fetch_skill_tags()
+            for skill in skills:
+                if skill['name'] in tags:
+                    verified_skill_ids.append(skill['id'])
+                else:
+                    ignored_skill_ids.append(skill['id'])
             XBLOCK_SKILL_VERIFIED.send_event(
                 xblock_info=XBlockSkillVerificationData(
                     usage_key=usage_key,
