@@ -6,6 +6,7 @@ Django applications, so these settings will not be used.
 """
 
 from os.path import abspath, dirname, join
+
 from workbench.settings import *
 
 
