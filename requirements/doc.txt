@@ -14,7 +14,7 @@ arrow==1.2.3
     # via
     #   -r requirements/test.txt
     #   jinja2-time
-asgiref==3.5.2
+asgiref==3.6.0
     # via
     #   -r requirements/test.txt
     #   django
@@ -35,11 +35,11 @@ boto==2.49.0
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
-boto3==1.26.32
+boto3==1.26.33
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.29.32
+botocore==1.29.33
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -85,6 +85,7 @@ django==3.2.16
     #   -r requirements/test.txt
     #   django-model-utils
     #   django-pyfs
+    #   djangorestframework
     #   openedx-events
     #   xblock-sdk
 django-model-utils==4.3.1
@@ -93,6 +94,8 @@ django-pyfs==3.2.0
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
+djangorestframework==3.14.0
+    # via -r requirements/test.txt
 doc8==1.0.0
     # via -r requirements/doc.in
 docutils==0.19
@@ -176,6 +179,8 @@ markupsafe==2.1.1
     #   -r requirements/test.txt
     #   jinja2
     #   xblock
+mock==4.0.3
+    # via -r requirements/test.txt
 more-itertools==9.0.0
     # via jaraco-classes
 openedx_events @ git+https://github.com/open-craft/openedx-events.git@68e8b4292fc020a4c7886f16f4701d452a45d06e
@@ -239,6 +244,7 @@ pytz==2022.7
     #   -r requirements/test.txt
     #   babel
     #   django
+    #   djangorestframework
     #   xblock
 pyyaml==6.0
     # via

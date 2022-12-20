@@ -19,7 +19,6 @@ LOGGER = logging.getLogger(__name__)
 _ = lambda text: text
 
 
-@XBlock.wants('user')
 class SkillTaggingMixin:
     has_verified_tags = Boolean(
         display_name=_("Has verified tags"),
@@ -52,7 +51,7 @@ class SkillTaggingMixin:
         if not result:
             return []
         else:
-            return result['skills']
+            return result[0]['skills']
 
     @XBlock.json_handler
     def fetch_tags(self, data, suffix=''):
