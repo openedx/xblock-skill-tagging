@@ -48,8 +48,11 @@ class SkillTaggingMixin:
         )
         response = api_client.get(XBLOCK_SKILL_TAGS_API)
         response.raise_for_status()
-        result = response.json()['results'][0]
-        return result['skills']
+        result = response.json()['results']
+        if not result:
+            return []
+        else:
+            return result['skills']
 
     @XBlock.json_handler
     def fetch_tags(self, data, suffix=''):
