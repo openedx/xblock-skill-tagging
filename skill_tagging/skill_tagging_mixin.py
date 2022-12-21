@@ -4,7 +4,7 @@ that can be added for all XBlocks.
 """
 
 import logging
-from urllib.parse import quote, urljoin
+from urllib.parse import urljoin
 
 from django.conf import settings
 from django.utils.translation import gettext as _
@@ -51,24 +51,25 @@ class SkillTaggingMixin:
             )
             return []
 
-        user = user_service.get_current_user()
+        user = user_service.get_user_by_anonymous_id()
         api_client = get_api_client(user=user)
 
         usage_id_str = str(self.scope_ids.usage_id)
         XBLOCK_SKILL_TAGS_API = urljoin(
             settings.TAXONOMY_API_BASE_URL,
-            '/taxonomy/api/v1/xblocks/?usage_key={}'.format(
-                quote(usage_id_str)
-            )
+            '/taxonomy/api/v1/xblocks'
         )
-        response = api_client.get(XBLOCK_SKILL_TAGS_API)
+        response = api_client.get(
+            XBLOCK_SKILL_TAGS_API,
+            params={"usage_key": usage_id_str}
+        )
         response.raise_for_status()
-        result = response.json()['results']
+        result = response.json()
         if not result:
             LOGGER.info("XBlock does not contain any skill tags")
             return []
         else:
-            return result[0]['skills']
+            return result[0].get('skills', [])
 
     @XBlock.json_handler
     def fetch_tags(self, data, suffix=''):  # pylint: disable=unused-argument
