@@ -72,7 +72,7 @@ class SkillTaggingMixin:
         results = response.json().get("results")
         if not results:
             LOGGER.info(
-                f"XBlock does not contain any skill tags for: {usage_id_str}",
+                f"XBlock<{usage_id_str}> does not contain any skill",
             )
             return []
         else:

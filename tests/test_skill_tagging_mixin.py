@@ -55,8 +55,8 @@ class SkillTaggingMixinTests(unittest.TestCase, TestCaseMixin):
         """
         Test that fetch_tags method works as expected
         """
-        sample_output = [
-            {
+        sample_output = {
+            "results": [{
                 "id": 1,
                 "skills": [
                     {
@@ -68,8 +68,8 @@ class SkillTaggingMixinTests(unittest.TestCase, TestCaseMixin):
                         "name": "SKILL-5"
                     },
                 ],
-            }
-        ]
+            }]
+        }
         api_client = Mock(
             get=Mock(
                 return_value=self._mock_response(
@@ -93,8 +93,8 @@ class SkillTaggingMixinTests(unittest.TestCase, TestCaseMixin):
         """
         Test that verify_tags method works as expected
         """
-        sample_output = [
-            {
+        sample_output = {
+            "results": [{
                 "id": 1,
                 "skills": [
                     {
@@ -106,8 +106,8 @@ class SkillTaggingMixinTests(unittest.TestCase, TestCaseMixin):
                         "name": "SKILL-5"
                     },
                 ],
-            }
-        ]
+            }]
+        }
         api_client = Mock(
             get=Mock(
                 return_value=self._mock_response(
