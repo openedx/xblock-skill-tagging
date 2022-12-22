@@ -1,0 +1,6 @@
+# Core requirements for using this application
+-c constraints.txt
+
+Django             # Web application framework
+django-model-utils        # Provides TimeStampedModel abstract base class
+git+https://github.com/open-craft/openedx-events.git@77ad965c4ac5157b861a19b8cb6b9240883008ba#egg=openedx_events
