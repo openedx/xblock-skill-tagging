@@ -16,6 +16,7 @@ from xblock.fields import Boolean, Scope
 from .utils import get_api_client
 
 LOGGER = logging.getLogger(__name__)
+PAGE_SIZE = getattr(settings, "TAXONOMY_API_SKILL_PAGE_SIZE", 100)
 
 
 # Make '_' a no-op so we can scrape strings
@@ -61,15 +62,19 @@ class SkillTaggingMixin:
         )
         response = api_client.get(
             XBLOCK_SKILL_TAGS_API,
-            params={"usage_key": usage_id_str}
+            params={
+                "usage_key": usage_id_str,
+                "page_size": PAGE_SIZE,
+                "verified": False,
+            },
         )
         response.raise_for_status()
-        result = response.json()
-        if not result:
-            LOGGER.info("XBlock does not contain any skill tags")
+        results = response.json().get("results")
+        if not results:
+            LOGGER.info(f"XBlock does not contain any skill tags for: {usage_id_str}")
             return []
         else:
-            return result[0].get('skills', [])
+            return results[0].get('skills', [])
 
     @XBlock.json_handler
     def fetch_tags(self, data, suffix=''):  # pylint: disable=unused-argument

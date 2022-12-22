@@ -55,3 +55,4 @@ TEMPLATES = [{
 }]
 
 TAXONOMY_API_BASE_URL = 'http://example.com'
+TAXONOMY_API_SKILL_PAGE_SIZE = 100
