@@ -35,11 +35,11 @@ boto==2.49.0
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
-boto3==1.26.35
+boto3==1.26.37
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.29.35
+botocore==1.29.37
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -73,7 +73,7 @@ cookiecutter==2.1.1
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
-coverage[toml]==7.0.0
+coverage[toml]==7.0.1
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -87,6 +87,7 @@ django==3.2.16
     #   django-pyfs
     #   djangorestframework
     #   openedx-events
+    #   openedx-filters
     #   xblock-sdk
 django-model-utils==4.3.1
     # via -r requirements/test.txt
@@ -96,7 +97,7 @@ django-pyfs==3.2.0
     #   xblock-sdk
 djangorestframework==3.14.0
     # via -r requirements/test.txt
-doc8==1.0.0
+doc8==1.1.1
     # via -r requirements/doc.in
 docutils==0.19
     # via
@@ -108,7 +109,7 @@ edx-opaque-keys[django]==2.3.0
     # via
     #   -r requirements/test.txt
     #   openedx-events
-exceptiongroup==1.0.4
+exceptiongroup==1.1.0
     # via
     #   -r requirements/test.txt
     #   pytest
@@ -187,6 +188,8 @@ mock==4.0.3
 more-itertools==9.0.0
     # via jaraco-classes
 openedx_events @ git+https://github.com/open-craft/openedx-events.git@77ad965c4ac5157b861a19b8cb6b9240883008ba
+    # via -r requirements/test.txt
+openedx-filters==0.8.0
     # via -r requirements/test.txt
 packaging==22.0
     # via

@@ -1,0 +1,40 @@
+<div class="debug-block" style="border: 2px solid red; padding: 1rem;">
+  <h5>Debug Info</h5>
+  <button onclick="verify_tags('{{ verify_tags_url }}')">Submit</button>
+  <pre id="response"></pre>
+</div>
+
+
+<script>
+var selected_tags = [];
+function fetch_tags(url) {
+  var csrf_token = document.cookie.split(";").find(c => c.startsWith("csrftoken="))?.split("=")[1];
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify([]),
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrf_token,
+    }
+  })
+    .then(res => res.json())
+    .then((data) => {
+      document.querySelector("#response").innerHTML = JSON.stringify(data)
+    });
+}
+fetch_tags('{{ fetch_tags_url }}')
+
+function verify_tags(url) {
+  var csrf_token = document.cookie.split(";").find(c => c.startsWith("csrftoken="))?.split("=")[1];
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(selected_tags),
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrf_token,
+    }
+  })
+    .then(res => res.json())
+    .then(data => document.querySelector("#response").innerHTML = JSON.stringify(data));
+}
+</script>
