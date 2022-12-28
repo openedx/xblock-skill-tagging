@@ -1,0 +1,76 @@
+.tag-verification-container {
+  margin-top: 20px;
+  background: #F2F0EF;
+  border-radius: 6px;
+  padding: 70px 65px;
+  display: flex;
+}
+
+.tag-verification-container h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+
+.tag-verification-container p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
+.tag-verification-tags-container {
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+  gap: 11px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tag-verification-chip {
+  display: inline-block;
+  background-color: white;
+  font-size: 13px;
+  padding: 2px 8px;
+  box-sizing: border-box;
+  border: 1px solid #F2F0EF;
+  border-radius: 6px;
+  color: #002121;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.tag-verification-chip.tag-verification-chip-hover:hover {
+  background: #ccc;
+}
+
+.tag-verification-chip-clickable {
+  cursor: pointer;
+}
+
+.tag-verification-tags-container input[type=checkbox] {
+  display: none;
+}
+
+.tag-verification-tags-container input[type=checkbox]:checked + label {
+  border: 1px solid #00262B;
+}
+
+.tag-verification-none-selected-container {
+  margin-bottom: 25px;
+  height: 28px;
+}
+
+.tag-verification-none-selected-container label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.tag-verification-none-selected-container input {
+  margin-right: 8px;
+}

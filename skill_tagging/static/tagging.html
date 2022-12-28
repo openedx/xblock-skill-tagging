@@ -1,40 +1,38 @@
-<div class="debug-block" style="border: 2px solid red; padding: 1rem;">
-  <h5>Debug Info</h5>
-  <button onclick="verify_tags('{{ verify_tags_url }}')">Submit</button>
-  <pre id="response"></pre>
+<div id="tag-verification-action-id" class="tag-verification-container">
+  <div>
+    <h1>What did you learn?</h1>
+    <p>
+      Congratulations, you've reached the end of this unit!<br>
+      Help future students by selecting the skills or subjects you learned from this unit.
+    </p>
+    <div id="tag-verification-tags-container-id" class="tag-verification-tags-container">
+    </div>
+    <div class="tag-verification-none-selected-container">
+      <input type="checkbox" onClick="tagVerificationUnselectAll(this)" id="tagVerificationUnselectAllId" />
+      <label for="tagVerificationUnselectAllId" class="tag-verification-none-selected">
+        None of these subjects were covered
+      </label>
+    </div>
+    <button class="tag-verification-submit" onclick="tagVerificationVerifyTags('{{ verify_tags_url }}')">Submit</button>
+  </div>
+  <div>
+    {{ image | safe }}
+  </div>
 </div>
 
+<div id="tag-verification-thankyou-container" class="tag-verification-container" style="display: none;">
+  <div>
+    <h1>Thank you!</h1>
+    <p>
+      Your feedback has helped to improve this course. The selections you made will assist future learners to decide if this course is right for them.
+    </p>
+  </div>
+</div>
 
-<script>
-var selected_tags = [];
-function fetch_tags(url) {
-  var csrf_token = document.cookie.split(";").find(c => c.startsWith("csrftoken="))?.split("=")[1];
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify([]),
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrf_token,
-    }
-  })
-    .then(res => res.json())
-    .then((data) => {
-      document.querySelector("#response").innerHTML = JSON.stringify(data)
-    });
-}
-fetch_tags('{{ fetch_tags_url }}')
-
-function verify_tags(url) {
-  var csrf_token = document.cookie.split(";").find(c => c.startsWith("csrftoken="))?.split("=")[1];
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify(selected_tags),
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrf_token,
-    }
-  })
-    .then(res => res.json())
-    .then(data => document.querySelector("#response").innerHTML = JSON.stringify(data));
-}
-</script>
+<div id="tag-verification-error-container" class="tag-verification-container" style="display: none;">
+  <div>
+    <h1>Problem connecting</h1>
+    <p>We couldn’t send your feedback. Please check your internet connection and try again.</p>
+    <button onclick="tagVerificationRetry()">Try again</button>
+  </div>
+</div>

@@ -35,11 +35,22 @@ class AddVerticalBlockSkillVerificationSection(PipelineStep):
     def run_filter(self, block, fragment, context, view):
         """Pipeline Step implementing the Filter"""
 
+        print("====================================================================================================")
+        print(getattr(block, "has_verified_tags"))
+        print("====================================================================================================")
         fetch_url = block.runtime.handler_url(block, "fetch_tags")
         verify_tags_url = block.runtime.handler_url(block, "verify_tags")
         html = self.resource_string("static/tagging.html")
-        data = {"fetch_tags_url": fetch_url, "verify_tags_url": verify_tags_url}
-        template = Template(html)
+        css = self.resource_string("static/tagging.css")
+        js = self.resource_string("static/tagging.js")
+        image = self.resource_string("static/brainstorming.svg")
+        data = {
+            "fetch_tags_url": fetch_url,
+            "verify_tags_url": verify_tags_url,
+            "image": image,
+        }
+        template_str = f'<style type="text/css">{css}</style>{html}<script>{js}</script>'
+        template = Template(template_str)
         context = Context(data)
         tags_div = template.render(context)
         fragment.content = f"{fragment.content}{tags_div}"
