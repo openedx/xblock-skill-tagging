@@ -1,38 +1,51 @@
 <div id="tag-verification-action-id" class="tag-verification-container">
-  <div>
-    <h1>What did you learn?</h1>
-    <p>
-      Congratulations, you've reached the end of this unit!<br>
-      Help future students by selecting the skills or subjects you learned from this unit.
-    </p>
-    <div id="tag-verification-tags-container-id" class="tag-verification-tags-container">
+    <div>
+        <h1>What did you learn?</h1>
+        <p>
+            Congratulations, you've reached the end of this unit!<br>
+                Help future students by selecting the skills or subjects you learned from this unit.
+        </p>
+        <div id="tag-verification-tags-container-id" class="tag-verification-tags-container">
+            {% for skill in skills %}
+            <input
+                type="checkbox"
+                name="tag-verification-skills"
+                id="tag-verification-skill-{{ skill.name }}"
+                value="{{ skill.id }}"
+                onclick="tagVerificationSetNoneToFalse(this)"
+            >
+            <label
+                for="tag-verification-skill-{{ skill.name }}"
+                class="tag-verification-chip tag-verification-chip-clickable tag-verification-chip-hover"
+            >{{ skill.name }}</label>
+            {% endfor %}
+        </div>
+        <div class="tag-verification-none-selected-container">
+            <input type="checkbox" onClick="tagVerificationUnselectAll(this)" id="tagVerificationUnselectAllId" />
+            <label for="tagVerificationUnselectAllId" class="tag-verification-none-selected">
+                None of these subjects were covered
+            </label>
+        </div>
+        <button class="tag-verification-submit" onclick="tagVerificationVerifyTags('{{ verify_tags_url }}')">Submit</button>
     </div>
-    <div class="tag-verification-none-selected-container">
-      <input type="checkbox" onClick="tagVerificationUnselectAll(this)" id="tagVerificationUnselectAllId" />
-      <label for="tagVerificationUnselectAllId" class="tag-verification-none-selected">
-        None of these subjects were covered
-      </label>
+    <div>
+        {{ image | safe }}
     </div>
-    <button class="tag-verification-submit" onclick="tagVerificationVerifyTags('{{ verify_tags_url }}')">Submit</button>
-  </div>
-  <div>
-    {{ image | safe }}
-  </div>
 </div>
 
 <div id="tag-verification-thankyou-container" class="tag-verification-container" style="display: none;">
-  <div>
-    <h1>Thank you!</h1>
-    <p>
-      Your feedback has helped to improve this course. The selections you made will assist future learners to decide if this course is right for them.
-    </p>
-  </div>
+    <div>
+        <h1>Thank you!</h1>
+        <p>
+            Your feedback has helped to improve this course. The selections you made will assist future learners to decide if this course is right for them.
+        </p>
+    </div>
 </div>
 
 <div id="tag-verification-error-container" class="tag-verification-container" style="display: none;">
-  <div>
-    <h1>Problem connecting</h1>
-    <p>We couldn’t send your feedback. Please check your internet connection and try again.</p>
-    <button onclick="tagVerificationRetry()">Try again</button>
-  </div>
+    <div>
+        <h1>Problem connecting</h1>
+        <p>We couldn’t send your feedback. Please check your internet connection and try again.</p>
+        <button onclick="tagVerificationRetry()">Try again</button>
+    </div>
 </div>

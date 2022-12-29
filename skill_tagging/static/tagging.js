@@ -1,5 +1,6 @@
 const tagSkillContainer = document.getElementById("tag-verification-tags-container-id");
 var tagSkillSelectedTags = [];
+var tagSkillIgnoredTags = [];
 
 function tagVerificationSetNoneToFalse(source) {
   if (!source.checked) {
@@ -9,52 +10,25 @@ function tagVerificationSetNoneToFalse(source) {
   checkbox.checked = false;
 }
 
-function tagVerficationCreateCheckbox(skillValue) {
-  var checkbox = document.createElement('input');
-  checkbox.type = 'checkbox';
-  checkbox.id = skillValue;
-  checkbox.name = 'tag-verification-skills';
-  checkbox.value = skillValue;
-  checkbox.setAttribute("onclick", "tagVerificationSetNoneToFalse(this)");
-
-  var label = document.createElement('label')
-  label.htmlFor = skillValue;
-  label.className = "tag-verification-chip tag-verification-chip-clickable tag-verification-chip-hover"
-  label.appendChild(document.createTextNode(skillValue));
-  tagSkillContainer.appendChild(checkbox);
-  tagSkillContainer.appendChild(label);
-}
-
-function tagVerificationFetchTags(url) {
-  var csrf_token = document.cookie.split(";").find(c => c.startsWith("csrftoken="))?.split("=")[1];
-
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify([]),
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrf_token,
-    }
-  })
-    .then(res => res.json())
-    .then((data) => {
-      data.forEach((skill) => tagVerficationCreateCheckbox(skill.name));
-    });
-}
-
-tagVerificationFetchTags('{{ fetch_tags_url }}')
-
 function tagVerificationVerifyTags(url) {
   var csrf_token = document.cookie.split(";").find(c => c.startsWith("csrftoken="))?.split("=")[1];
   var checkboxes = document.getElementsByName('tag-verification-skills');
+  // clear containers
+  tagSkillSelectedTags = [];
+  tagSkillIgnoredTags = [];
   for(var i=0, n=checkboxes.length; i<n; i++) {
     if (checkboxes[i].checked) {
-      tagSkillSelectedTags.push(checkboxes[i].value);
+      tagSkillSelectedTags.push(parseInt(checkboxes[i].value));
+    } else {
+      tagSkillIgnoredTags.push(parseInt(checkboxes[i].value));
     }
   }
   fetch(url, {
     method: "POST",
-    body: JSON.stringify(tagSkillSelectedTags),
+    body: JSON.stringify({
+      verified_skills: tagSkillSelectedTags,
+      ignored_skills: tagSkillIgnoredTags,
+    }),
     headers: {
       "Content-Type": "application/json",
       "X-CSRFToken": csrf_token,

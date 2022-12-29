@@ -32,20 +32,29 @@ class AddVerticalBlockSkillVerificationSection(PipelineStep):
         data = pkg_resources.resource_string(__name__, path)
         return data.decode("utf8")
 
+    def fetch_related_skills(self, block):
+        has_verified_tags = getattr(block, "has_verified_tags", None)
+        if has_verified_tags is None or has_verified_tags is True:
+            return []
+        fetch_tags = getattr(block, "fetch_skill_tags", None)
+        if fetch_tags is None:
+            return []
+        tags = fetch_tags()
+        return tags
+
     def run_filter(self, block, fragment, context, view):
         """Pipeline Step implementing the Filter"""
 
-        print("====================================================================================================")
-        print(getattr(block, "has_verified_tags"))
-        print("====================================================================================================")
-        fetch_url = block.runtime.handler_url(block, "fetch_tags")
+        skills = self.fetch_related_skills(block)
+        if not skills:
+            return {"block": block, "fragment": fragment, "context": context, "view": view}
         verify_tags_url = block.runtime.handler_url(block, "verify_tags")
         html = self.resource_string("static/tagging.html")
         css = self.resource_string("static/tagging.css")
         js = self.resource_string("static/tagging.js")
         image = self.resource_string("static/brainstorming.svg")
         data = {
-            "fetch_tags_url": fetch_url,
+            "skills": skills,
             "verify_tags_url": verify_tags_url,
             "image": image,
         }
