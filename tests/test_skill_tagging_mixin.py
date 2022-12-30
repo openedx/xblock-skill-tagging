@@ -10,7 +10,7 @@ from unittest.mock import Mock, patch
 from requests.models import Response
 from rest_framework import status
 
-from .utils import TestCaseMixin, get_tagging_mixin, make_block
+from test_utils import TestCaseMixin, get_tagging_mixin, make_block
 
 
 @patch('skill_tagging.skill_tagging_mixin.get_api_client')

@@ -54,7 +54,7 @@ class AddVerticalBlockSkillVerificationSection(PipelineStep):
         # random returns a number between 0 and 1 (inclusive).
         return random.random() < SHOW_SKILL_VERIFICATION_PROBABILITY
 
-    def run_filter(self, block, fragment, context, view):
+    def run_filter(self, block, fragment, context, view):  # pylint: disable=arguments-differ
         """Pipeline Step implementing the Filter"""
 
         skills = self.fetch_related_skills(block)

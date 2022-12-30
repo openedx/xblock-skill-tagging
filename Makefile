@@ -63,19 +63,17 @@ piptools: ## install pinned version of pip-compile and pip-sync
 requirements: piptools ## install development environment requirements
 	pip-sync -q requirements/dev.txt requirements/private.*
 
-test:  ## Run the tests
-	mkdir -p var
-	rm -rf .coverage
-	python -m coverage run --rcfile=.coveragerc ./test.py --noinput
+test: clean ## run tests in the current virtualenv
+	DJANGO_SETTINGS_MODULE=test_settings pytest
 
 diff_cover: test ## find diff lines that need test coverage
 	diff-cover coverage.xml
 
-test-all: quality pii_check ## run tests on every supported Python/Django combination
+test-all: quality ## run tests on every supported Python/Django combination
 	tox
 	tox -e docs
 
-validate: quality pii_check test ## run tests and quality checks
+validate: quality test ## run tests and quality checks
 
 selfcheck: ## check that the Makefile is well-formed
 	@echo "The Makefile is well-formed."
