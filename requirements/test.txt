@@ -21,9 +21,9 @@ binaryornot==0.4.4
     # via cookiecutter
 boto==2.49.0
     # via xblock-sdk
-boto3==1.26.37
+boto3==1.26.40
     # via fs-s3fs
-botocore==1.29.37
+botocore==1.29.40
     # via
     #   boto3
     #   s3transfer
@@ -102,11 +102,11 @@ markupsafe==2.1.1
     # via
     #   jinja2
     #   xblock
-mock==4.0.3
+mock==5.0.0
     # via -r requirements/test.in
 openedx_events @ git+https://github.com/open-craft/openedx-events.git@77ad965c4ac5157b861a19b8cb6b9240883008ba
     # via -r requirements/base.txt
-openedx-filters==0.8.0
+openedx-filters @ git+https://github.com/open-craft/openedx-filters.git@d0206cf84f2e5e22b1a99d06566d88839d40b9fe
     # via -r requirements/base.txt
 packaging==22.0
     # via pytest

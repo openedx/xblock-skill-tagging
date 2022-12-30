@@ -6,7 +6,9 @@ from __future__ import absolute_import
 import json
 import re
 
-from mock import patch
+from mock import patch, Mock
+from requests.models import Response
+from rest_framework.status import HTTP_200_OK
 from webob import Request
 from workbench.runtime import WorkbenchRuntime
 from xblock.core import XBlock
@@ -57,8 +59,46 @@ class TestCaseMixin:
     """ Helpful mixins for unittest TestCase subclasses """
     maxDiff = None
 
-    FETCH_TAGS_HANDLER = 'fetch_tags'
     VERIFY_TAGS_HANDLER = 'verify_tags'
+
+    def setUp(self):
+        self.block = make_block()
+        self.patch_workbench()
+        fake_user = Mock()
+        fake_user.opt_attrs = {
+            'edx-platform.user_role': 'student',
+            'edx-platform.is_authenticated': True,
+        }
+        mock_user_service = Mock()
+        mock_user_service.get_current_user.return_value = fake_user
+        self.block.runtime.service = Mock(return_value=mock_user_service)
+
+    def get_mock_api_response(self):
+        """Mock fetch tags response"""
+        sample_output = {
+            "results": [{
+                "id": 1,
+                "skills": [
+                    {
+                        "id": 1,
+                        "name": "SKILL-0"
+                    },
+                    {
+                        "id": 6,
+                        "name": "SKILL-5"
+                    },
+                ],
+            }]
+        }
+        api_client = Mock(
+            get=Mock(
+                return_value=self._mock_response(
+                    HTTP_200_OK,
+                    sample_output
+                )
+            )
+        )
+        return api_client
 
     def patch_workbench(self):
         """
@@ -97,3 +137,13 @@ class TestCaseMixin:
             self.assertEqual(response.status_code, 200)
             return json.loads(response.body.decode('utf-8'))
         return response
+
+    def _mock_response(self, status_code, content=None):
+        """
+        Generates a python core response.
+        """
+        mock_response = Response()
+        mock_response.status_code = status_code
+        # pylint: disable=protected-access
+        mock_response._content = json.dumps(content).encode('utf-8')
+        return mock_response

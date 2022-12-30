@@ -23,7 +23,7 @@ fastavro==1.7.0
     # via openedx-events
 openedx_events @ git+https://github.com/open-craft/openedx-events.git@77ad965c4ac5157b861a19b8cb6b9240883008ba
     # via -r requirements/base.in
-openedx-filters==0.8.0
+openedx-filters @ git+https://github.com/open-craft/openedx-filters.git@d0206cf84f2e5e22b1a99d06566d88839d40b9fe
     # via -r requirements/base.in
 pbr==5.11.0
     # via stevedore

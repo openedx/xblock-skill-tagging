@@ -10,7 +10,7 @@ from django.template import Context, Template
 from openedx_filters import PipelineStep
 
 logger = logging.getLogger(__name__)
-SHOW_SKILL_VERIFICATION_PROBABILITY = getattr(settings, "SHOW_SKILL_VERIFICATION_PROBABILITY", 0.5)
+DEFAULT_PROBABILITY = 0.5
 
 
 class AddVerticalBlockSkillVerificationSection(PipelineStep):
@@ -52,7 +52,8 @@ class AddVerticalBlockSkillVerificationSection(PipelineStep):
         if not skills:
             return False
         # random returns a number between 0 and 1 (inclusive).
-        return random.random() < SHOW_SKILL_VERIFICATION_PROBABILITY
+        probability = getattr(settings, "SHOW_SKILL_VERIFICATION_PROBABILITY", DEFAULT_PROBABILITY)
+        return random.random() < probability
 
     def run_filter(self, block, fragment, context, view):  # pylint: disable=arguments-differ
         """Pipeline Step implementing the Filter"""
