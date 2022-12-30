@@ -70,12 +70,12 @@
 }
 
 .tag-verification-tags-container input[type=checkbox] {
-  position: absolute;
-  /* set same dimensions as the SVG */
-  width: 1em;
-  height: 1em;
-  /* hide it */
-  opacity: 0.00000;
+    position: absolute;
+    /* set same dimensions as the SVG */
+    width: 1em;
+    height: 1em;
+    /* hide it */
+    opacity: 0.00000;
 }
 
 .tag-verification-tags-container input[type=checkbox]:checked + label {

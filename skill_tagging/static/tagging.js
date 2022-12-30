@@ -17,7 +17,7 @@ function tagVerificationVerifyTags(url) {
   // clear containers
   tagSkillSelectedTags = [];
   tagSkillIgnoredTags = [];
-  for(var i=0, n=checkboxes.length; i<n; i++) {
+  for (var i = 0, n = checkboxes.length; i < n; i++) {
     if (checkboxes[i].checked) {
       tagSkillSelectedTags.push(parseInt(checkboxes[i].value));
     } else {
@@ -56,7 +56,7 @@ function tagVerificationUnselectAll(source) {
     return;
   }
   checkboxes = document.getElementsByName('tag-verification-skills');
-  for(var i=0, n=checkboxes.length;i<n;i++) {
+  for (var i = 0, n = checkboxes.length; i < n; i++) {
     checkboxes[i].checked = false;
   }
 }
@@ -65,9 +65,4 @@ function tagVerificationRetry() {
   document.querySelector("#tag-verification-action-id").style.display = "flex";
   document.querySelector("#tag-verification-thankyou-container").style.display = "none";
   document.querySelector("#tag-verification-error-container").style.display = "none";
-  checkboxes = document.getElementsByName('tag-verification-skills');
-  for(var i=0, n=checkboxes.length;i<n;i++) {
-    var index = tagSkillSelectedTags.findIndex(checkboxes[i].value);
-    checkboxes[i].checked = index == -1 ? false : true;
-  }
 }
