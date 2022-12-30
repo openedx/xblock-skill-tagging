@@ -64,6 +64,7 @@ requirements: piptools ## install development environment requirements
 	pip-sync -q requirements/dev.txt requirements/private.*
 
 test: clean ## run tests in the current virtualenv
+	mkdir -p var
 	DJANGO_SETTINGS_MODULE=test_settings pytest
 
 diff_cover: test ## find diff lines that need test coverage
