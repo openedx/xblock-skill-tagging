@@ -2,12 +2,15 @@
 Module that contains the openedx_filters pipeline steps.
 """
 import logging
-import pkg_resources
+import random
 
+import pkg_resources
+from django.conf import settings
 from django.template import Context, Template
 from openedx_filters import PipelineStep
 
 logger = logging.getLogger(__name__)
+SHOW_SKILL_VERIFICATION_PROBABILITY = getattr(settings, "SHOW_SKILL_VERIFICATION_PROBABILITY", 0.5)
 
 
 class AddVerticalBlockSkillVerificationSection(PipelineStep):
@@ -33,6 +36,7 @@ class AddVerticalBlockSkillVerificationSection(PipelineStep):
         return data.decode("utf8")
 
     def fetch_related_skills(self, block):
+        """Checks `has_verified_tags` and fetchs related skills."""
         has_verified_tags = getattr(block, "has_verified_tags", None)
         if has_verified_tags is None or has_verified_tags is True:
             return []
@@ -42,11 +46,19 @@ class AddVerticalBlockSkillVerificationSection(PipelineStep):
         tags = fetch_tags()
         return tags
 
+    def should_run_filter(self, skills):
+        """Determines whether we should run filter and display form."""
+        # return false if no skills found.
+        if not skills:
+            return False
+        # random returns a number between 0 and 1 (inclusive).
+        return random.random() < SHOW_SKILL_VERIFICATION_PROBABILITY
+
     def run_filter(self, block, fragment, context, view):
         """Pipeline Step implementing the Filter"""
 
         skills = self.fetch_related_skills(block)
-        if not skills:
+        if not self.should_run_filter(skills):
             return {"block": block, "fragment": fragment, "context": context, "view": view}
         verify_tags_url = block.runtime.handler_url(block, "verify_tags")
         html = self.resource_string("static/tagging.html")

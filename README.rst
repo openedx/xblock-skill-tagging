@@ -16,11 +16,10 @@ Purpose
 
 Django app plugin for fetching and verifying tags for xblock skills.
 
-TODO: The ``README.rst`` file should start with a brief description of the repository and its purpose.
-It should be described in the context of other repositories under the ``openedx``
-organization. It should make clear where this fits in to the overall Open edX
-codebase and should be oriented towards people who are new to the Open edX
-project.
+Set ``SHOW_SKILL_VERIFICATION_PROBABILITY`` in your django settings to configure
+probability of displaying verification form. Values in range 0 to 1 are
+allowed, where 0 means never and 1 means always display. Default value is 0.5
+i.e. 50% chance of displaying the form.
 
 Getting Started
 ***************
