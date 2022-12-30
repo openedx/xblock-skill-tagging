@@ -17,7 +17,9 @@
             <label
                 for="tag-verification-skill-{{ skill.name }}"
                 class="tag-verification-chip tag-verification-chip-clickable tag-verification-chip-hover"
-            >{{ skill.name }}</label>
+            >
+                {{ skill.name }}
+            </label>
             {% endfor %}
         </div>
         <div class="tag-verification-none-selected-container">
@@ -26,7 +28,7 @@
                 None of these subjects were covered
             </label>
         </div>
-        <button class="tag-verification-submit" onclick="tagVerificationVerifyTags('{{ verify_tags_url }}')">Submit</button>
+        <button onclick="tagVerificationVerifyTags('{{ verify_tags_url }}')">Submit</button>
     </div>
     <div>
         {{ image | safe }}

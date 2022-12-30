@@ -83,8 +83,9 @@ class SkillTaggingMixin:
         """
         Handler to verify tags
         """
+
         verified_skills = data.get("verified_skills", [])
-        ignored_skills = data.get("verified_skills", [])
+        ignored_skills = data.get("ignored_skills", [])
         usage_key = str(self.scope_ids.usage_id)
         if not self.has_verified_tags and (verified_skills or ignored_skills):
             XBLOCK_SKILL_VERIFIED.send_event(
