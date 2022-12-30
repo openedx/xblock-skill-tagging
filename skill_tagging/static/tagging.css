@@ -6,6 +6,12 @@
     display: flex;
 }
 
+@media (max-width: 767px) {
+   .tag-verification-image-container {
+      display: none;
+   }
+}
+
 .tag-verification-container h1 {
     font-style: normal;
     font-weight: 700;
