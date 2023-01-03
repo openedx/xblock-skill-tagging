@@ -46,11 +46,8 @@ class AddVerticalBlockSkillVerificationSection(PipelineStep):
         tags = fetch_tags()
         return tags
 
-    def should_run_filter(self, skills):
+    def should_run_filter(self):
         """Determines whether we should run filter and display form."""
-        # return false if no skills found.
-        if not skills:
-            return False
         # random returns a number between 0 and 1 (inclusive).
         probability = getattr(settings, "SHOW_SKILL_VERIFICATION_PROBABILITY", DEFAULT_PROBABILITY)
         return random.random() < probability
@@ -59,7 +56,7 @@ class AddVerticalBlockSkillVerificationSection(PipelineStep):
         """Pipeline Step implementing the Filter"""
 
         skills = self.fetch_related_skills(block)
-        if not self.should_run_filter(skills):
+        if not skills or not self.should_run_filter():
             return {"block": block, "fragment": fragment, "context": context, "view": view}
         verify_tags_url = block.runtime.handler_url(block, "verify_tags")
         html = self.resource_string("static/tagging.html")
