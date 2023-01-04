@@ -2,7 +2,22 @@ const tagSkillContainer = document.getElementById("tag-verification-tags-contain
 var tagSkillVerifiedTags = [];
 var tagSkillIgnoredTags = [];
 
-function tagVerificationSetNoneToFalse(source) {
+function tagVerificationToggleSubmitButton() {
+  var enable = false;
+  checkboxes = Array.from(document.getElementsByName('tag-verification-skills'));
+  checkboxes.push(document.getElementById("tagVerificationUnselectAllId"));
+  for (var i = 0, n = checkboxes.length; i < n; i++) {
+    if (checkboxes[i].checked) {
+      enable = true;
+      break;
+    };
+  }
+  var submitButton = document.getElementById("tagVerificationSubmitButton");
+  submitButton.disabled = !enable;
+}
+
+function tagVerificationOnSkillClick(source) {
+  tagVerificationToggleSubmitButton();
   if (!source.checked) {
     return;
   }
@@ -51,7 +66,8 @@ function tagVerificationVerifyTags(url) {
     });
 }
 
-function tagVerificationUnselectAll(source) {
+function tagVerificationOnNoneCheckboxClick(source) {
+  tagVerificationToggleSubmitButton();
   if (!source.checked) {
     return;
   }

@@ -8,7 +8,7 @@
         <div id="tag-verification-tags-container-id" class="tag-verification-tags-container">
             {% for skill in skills %}
             <input type="checkbox" name="tag-verification-skills" id="tag-verification-skill-{{ skill.name }}"
-                value="{{ skill.id }}" onclick="tagVerificationSetNoneToFalse(this)">
+                value="{{ skill.id }}" onclick="tagVerificationOnSkillClick(this)">
             <label for="tag-verification-skill-{{ skill.name }}"
                 class="tag-verification-chip tag-verification-chip-clickable tag-verification-chip-hover">
                 {{ skill.name }}
@@ -16,12 +16,14 @@
             {% endfor %}
         </div>
         <div class="tag-verification-none-selected-container">
-            <input type="checkbox" onClick="tagVerificationUnselectAll(this)" id="tagVerificationUnselectAllId" />
+            <input type="checkbox" onClick="tagVerificationOnNoneCheckboxClick(this)"
+                id="tagVerificationUnselectAllId" />
             <label for="tagVerificationUnselectAllId" class="tag-verification-none-selected">
                 None of these subjects were covered
             </label>
         </div>
-        <button onclick="tagVerificationVerifyTags('{{ verify_tags_url }}')">Submit</button>
+        <button id="tagVerificationSubmitButton" disabled
+            onclick="tagVerificationVerifyTags('{{ verify_tags_url }}')">Submit</button>
     </div>
     <div class="tag-verification-image-container">
         {{ image | safe }}
