@@ -25,8 +25,24 @@ function tagVerificationOnSkillClick(source) {
   checkbox.checked = false;
 }
 
+// https://www.quirksmode.org/js/cookies.html
+function readCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
 function tagVerificationVerifyTags(url) {
-  var csrf_token = document.cookie.split(";").find(c => c.startsWith("csrftoken="))?.split("=")[1];
+  var csrftoken = readCookie("csrftoken");
+  if (!csrftoken) {
+    alert("csrftoken not found! Please refresh the page or re login");
+    return;
+  }
   var checkboxes = document.getElementsByName('tag-verification-skills');
   var noneSelectedCheckbox = document.getElementById('tagVerificationUnselectAllId');
   // clear containers
@@ -51,7 +67,7 @@ function tagVerificationVerifyTags(url) {
     }),
     headers: {
       "Content-Type": "application/json",
-      "X-CSRFToken": csrf_token,
+      "X-CSRFToken": csrftoken,
     }
   })
     .then(res => res.json())
