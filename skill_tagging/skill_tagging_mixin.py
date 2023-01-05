@@ -35,7 +35,7 @@ class SkillTaggingMixin:
         scope=Scope.user_state
     )
 
-    def _fetch_skill_tags(self):
+    def fetch_skill_tags(self):
         """
         Fetch skill tags for the XBlock by calling taxonomy api.
         """
@@ -79,32 +79,20 @@ class SkillTaggingMixin:
             return results[0].get('skills', [])
 
     @XBlock.json_handler
-    def fetch_tags(self, data, suffix=''):  # pylint: disable=unused-argument
-        """
-        Handler for fetching skill tags associated with this XBlock
-        """
-        return self._fetch_skill_tags()
-
-    @XBlock.json_handler
-    def verify_tags(self, tags, suffix=''):  # pylint: disable=unused-argument
+    def verify_tags(self, data, suffix=''):  # pylint: disable=unused-argument
         """
         Handler to verify tags
         """
+
+        verified_skills = data.get("verified_skills", [])
+        ignored_skills = data.get("ignored_skills", [])
         usage_key = str(self.scope_ids.usage_id)
-        verified_skill_ids = []
-        ignored_skill_ids = []
-        if not self.has_verified_tags:
-            skills = self._fetch_skill_tags()
-            for skill in skills:
-                if skill['name'] in tags:
-                    verified_skill_ids.append(skill['id'])
-                else:
-                    ignored_skill_ids.append(skill['id'])
+        if not self.has_verified_tags and (verified_skills or ignored_skills):
             XBLOCK_SKILL_VERIFIED.send_event(
                 xblock_info=XBlockSkillVerificationData(
                     usage_key=usage_key,
-                    verified_skills=verified_skill_ids,
-                    ignored_skills=ignored_skill_ids,
+                    verified_skills=verified_skills,
+                    ignored_skills=ignored_skills,
                 )
             )
             self.has_verified_tags = True

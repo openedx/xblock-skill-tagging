@@ -1,0 +1,113 @@
+.tag-verification-container {
+    margin-top: 20px;
+    background: #F2F0EF;
+    border-radius: 6px;
+    padding: 70px 65px;
+    display: flex;
+}
+
+@media (max-width: 767px) {
+   .tag-verification-image-container {
+      display: none;
+   }
+}
+
+.tag-verification-container h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 28px;
+    margin-bottom: 20px;
+}
+
+.tag-verification-container button {
+    background: #00262B;
+    padding: 10px 16px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #FFFFFF;
+    box-shadow: none;
+}
+
+.tag-verification-container button:hover, .tag-verification-container button:focus {
+    background: #00262B;
+    color: #FFFFFF;
+    border: 1px solid #00262B;
+    box-shadow: none;
+}
+
+.tag-verification-container p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+}
+.tag-verification-tags-container {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    gap: 11px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tag-verification-chip {
+    display: inline-block;
+    background-color: white;
+    font-size: 13px;
+    padding: 2px 8px;
+    box-sizing: border-box;
+    border: 1px solid #F2F0EF;
+    border-radius: 6px;
+    color: #002121;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.tag-verification-chip.tag-verification-chip-hover:hover {
+    background: #ccc;
+}
+
+.tag-verification-chip-clickable {
+    cursor: pointer;
+}
+
+.tag-verification-tags-container input[type=checkbox] {
+    position: absolute;
+    /* set same dimensions as the SVG */
+    width: 1em;
+    height: 1em;
+    /* hide it */
+    opacity: 0.00000;
+}
+
+.tag-verification-tags-container input[type=checkbox]:checked + label {
+    border: 1px solid #00262B;
+}
+
+.tag-verification-tags-container input[type=checkbox]:focus + label {
+    background: #ccc;
+}
+
+.tag-verification-none-selected-container {
+    margin-bottom: 25px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+
+.tag-verification-none-selected-container label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 28px;
+    margin: 0px;
+}
+
+.tag-verification-none-selected-container input {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+}

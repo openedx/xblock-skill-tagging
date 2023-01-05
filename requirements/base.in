@@ -3,4 +3,6 @@
 
 Django             # Web application framework
 django-model-utils        # Provides TimeStampedModel abstract base class
+# TODO: update below dependencies when its commits are merged to upstream
 git+https://github.com/open-craft/openedx-events.git@77ad965c4ac5157b861a19b8cb6b9240883008ba#egg=openedx_events
+git+https://github.com/open-craft/openedx-filters.git@d0206cf84f2e5e22b1a99d06566d88839d40b9fe#egg=openedx-filters
