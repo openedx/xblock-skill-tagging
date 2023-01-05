@@ -44,7 +44,6 @@ function tagVerificationVerifyTags(url) {
     return;
   }
   var checkboxes = document.getElementsByName('tag-verification-skills');
-  var noneSelectedCheckbox = document.getElementById('tagVerificationUnselectAllId');
   // clear containers
   tagSkillVerifiedTags = [];
   tagSkillIgnoredTags = [];
@@ -54,10 +53,6 @@ function tagVerificationVerifyTags(url) {
     } else {
       tagSkillIgnoredTags.push(parseInt(checkboxes[i].value));
     }
-  }
-  if (tagSkillVerifiedTags.length === 0 && !noneSelectedCheckbox.checked) {
-    alert("Please select atleast one skill or check 'None of these subjects were covered' checkbox!");
-    return;
   }
   fetch(url, {
     method: "POST",
