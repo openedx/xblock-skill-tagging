@@ -12,6 +12,7 @@ from openedx_events.learning.data import XBlockSkillVerificationData
 from openedx_events.learning.signals import XBLOCK_SKILL_VERIFIED
 from xblock.core import XBlock
 from xblock.fields import Boolean, Scope
+from xblock.runtime import NoSuchServiceError
 
 from .utils import get_api_client
 
@@ -35,6 +36,16 @@ class SkillTaggingMixin:
         scope=Scope.user_state
     )
 
+    def _get_user_service(self):
+        """
+        Tries to get user service, if not found returns None.
+        """
+        try:
+            user_service = self.runtime.service(self, 'user')
+        except NoSuchServiceError:
+            return None
+        return user_service
+
     def fetch_skill_tags(self):
         """
         Fetch skill tags for the XBlock by calling taxonomy api.
@@ -45,7 +56,7 @@ class SkillTaggingMixin:
             )
             return []
 
-        user_service = self.runtime.service(self, 'user')
+        user_service = self._get_user_service()
         if not user_service:
             LOGGER.info(
                 "No user service available for this xblock. Cannot proceed."

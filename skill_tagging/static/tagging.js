@@ -1,27 +1,23 @@
-const tagSkillContainer = document.getElementById("tag-verification-tags-container-id");
-var tagSkillVerifiedTags = [];
-var tagSkillIgnoredTags = [];
-
-function tagVerificationToggleSubmitButton() {
+function tagVerificationToggleSubmitButton(blockId) {
   var enable = false;
-  checkboxes = Array.from(document.getElementsByName('tag-verification-skills'));
-  checkboxes.push(document.getElementById("tagVerificationUnselectAllId"));
+  checkboxes = Array.from(document.getElementsByName(`tag-verification-skills-${blockId}`));
+  checkboxes.push(document.getElementById(`tagVerificationUnselectAllId-${blockId}`));
   for (var i = 0, n = checkboxes.length; i < n; i++) {
     if (checkboxes[i].checked) {
       enable = true;
       break;
     };
   }
-  var submitButton = document.getElementById("tagVerificationSubmitButton");
+  var submitButton = document.getElementById(`tagVerificationSubmitButton-${blockId}`);
   submitButton.disabled = !enable;
 }
 
-function tagVerificationOnSkillClick(source) {
-  tagVerificationToggleSubmitButton();
+function tagVerificationOnSkillClick(source, blockId) {
+  tagVerificationToggleSubmitButton(blockId);
   if (!source.checked) {
     return;
   }
-  checkbox = document.getElementById("tagVerificationUnselectAllId");
+  checkbox = document.getElementById(`tagVerificationUnselectAllId-${blockId}`);
   checkbox.checked = false;
 }
 
@@ -37,16 +33,26 @@ function readCookie(name) {
   return null;
 }
 
-function tagVerificationVerifyTags(url) {
+function toggleBtnLoading(source) {
+  if (source.className.includes("loading")) {
+    source.className = "";
+    source.disabled = false;
+  } else {
+    source.className = "loading";
+    source.disabled = true;
+  }
+}
+
+function tagVerificationVerifyTags(source, url, blockId) {
   var csrftoken = readCookie("csrftoken");
   if (!csrftoken) {
     alert("csrftoken not found! Please refresh the page or re login");
     return;
   }
-  var checkboxes = document.getElementsByName('tag-verification-skills');
+  var checkboxes = document.getElementsByName(`tag-verification-skills-${blockId}`);
   // clear containers
-  tagSkillVerifiedTags = [];
-  tagSkillIgnoredTags = [];
+  var tagSkillVerifiedTags = [];
+  var tagSkillIgnoredTags = [];
   for (var i = 0, n = checkboxes.length; i < n; i++) {
     if (checkboxes[i].checked) {
       tagSkillVerifiedTags.push(parseInt(checkboxes[i].value));
@@ -54,6 +60,7 @@ function tagVerificationVerifyTags(url) {
       tagSkillIgnoredTags.push(parseInt(checkboxes[i].value));
     }
   }
+  toggleBtnLoading(source)
   fetch(url, {
     method: "POST",
     body: JSON.stringify({
@@ -67,29 +74,31 @@ function tagVerificationVerifyTags(url) {
   })
     .then(res => res.json())
     .then(() => {
-      document.querySelector("#tag-verification-action-id").style.display = "none";
-      document.querySelector("#tag-verification-thankyou-container").style.display = "flex";
+      document.querySelector(`#tag-verification-action-id-${blockId}`).style.display = "none";
+      document.querySelector(`#tag-verification-thankyou-container-${blockId}`).style.display = "flex";
+      toggleBtnLoading(source);
     })
     .catch(() => {
-      document.querySelector("#tag-verification-action-id").style.display = "none";
-      document.querySelector("#tag-verification-thankyou-container").style.display = "none";
-      document.querySelector("#tag-verification-error-container").style.display = "flex";
+      toggleBtnLoading(source);
+      document.querySelector(`#tag-verification-action-id-${blockId}`).style.display = "none";
+      document.querySelector(`#tag-verification-thankyou-container-${blockId}`).style.display = "none";
+      document.querySelector(`#tag-verification-error-container-${blockId}`).style.display = "flex";
     });
 }
 
-function tagVerificationOnNoneCheckboxClick(source) {
-  tagVerificationToggleSubmitButton();
+function tagVerificationOnNoneCheckboxClick(source, blockId) {
+  tagVerificationToggleSubmitButton(blockId);
   if (!source.checked) {
     return;
   }
-  checkboxes = document.getElementsByName('tag-verification-skills');
+  checkboxes = document.getElementsByName(`tag-verification-skills-${blockId}`);
   for (var i = 0, n = checkboxes.length; i < n; i++) {
     checkboxes[i].checked = false;
   }
 }
 
-function tagVerificationRetry() {
-  document.querySelector("#tag-verification-action-id").style.display = "flex";
-  document.querySelector("#tag-verification-thankyou-container").style.display = "none";
-  document.querySelector("#tag-verification-error-container").style.display = "none";
+function tagVerificationRetry(blockId) {
+  document.querySelector(`#tag-verification-action-id-${blockId}`).style.display = "flex";
+  document.querySelector(`#tag-verification-thankyou-container-${blockId}`).style.display = "none";
+  document.querySelector(`#tag-verification-error-container-${blockId}`).style.display = "none";
 }
