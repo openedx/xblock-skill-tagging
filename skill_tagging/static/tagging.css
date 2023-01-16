@@ -1,9 +1,32 @@
-.tag-verification-container {
+.tag-verification-vertical {
     margin-top: 20px;
     background: #F2F0EF;
-    border-radius: 6px;
     padding: 70px 65px;
+}
+
+.tag-verification-video {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: black;
+    z-index: 0;
+}
+
+.tag-verification-video * {
+    text-align: center;
+    justify-content: center;
+    color: white;
+}
+
+.tag-verification-container {
+    border-radius: 6px;
+    display: flex;
+    box-sizing: border-box;
 }
 
 @media (max-width: 767px) {
@@ -20,20 +43,39 @@
     margin-bottom: 20px;
 }
 
-.tag-verification-container button {
+.tag-verification-vertical button {
     background: #00262B;
+    color: #FFFFFF;
+}
+
+.tag-verification-video button {
+    background: white;
+    color: #00262B;
+}
+
+.tag-verification-container button {
     padding: 10px 16px;
     font-weight: 500;
     font-size: 18px;
     line-height: 24px;
-    color: #FFFFFF;
     box-shadow: none;
 }
 
-.tag-verification-container button:hover, .tag-verification-container button:focus {
+.tag-verification-video p {
+    width: 465px;
+}
+
+.tag-verification-vertical button:hover, .tag-verification-vertical button:focus {
     background: #00262B;
     color: #FFFFFF;
     border: 1px solid #00262B;
+    box-shadow: none;
+}
+
+.tag-verification-video button:hover, .tag-verification-video button:focus {
+    background: #065683;
+    color: white;
+    border: 1px solid #065683;
     box-shadow: none;
 }
 
@@ -54,21 +96,34 @@
 
 .tag-verification-chip {
     display: inline-block;
-    background-color: white;
     font-size: 13px;
     padding: 2px 8px;
     box-sizing: border-box;
-    border: 1px solid #F2F0EF;
     border-radius: 6px;
-    color: #002121;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 24px;
 }
 
-.tag-verification-chip.tag-verification-chip-hover:hover {
+.tag-verification-vertical .tag-verification-chip {
+    color: #002121;
+    background-color: white;
+    border: 1px solid #F2F0EF;
+}
+
+.tag-verification-video .tag-verification-chip {
+    color: white;
+    background-color: #2D494E;
+    border: 1px solid #2D494E;
+}
+
+.tag-verification-vertical .tag-verification-chip.tag-verification-chip-hover:hover {
     background: #ccc;
+}
+
+.tag-verification-video .tag-verification-chip.tag-verification-chip-hover:hover {
+    background: #065683;
 }
 
 .tag-verification-chip-clickable {
@@ -84,12 +139,20 @@
     opacity: 0.00000;
 }
 
-.tag-verification-tags-container input[type=checkbox]:checked + label {
+.tag-verification-vertical .tag-verification-tags-container input[type=checkbox]:checked + label {
     border: 1px solid #00262B;
 }
 
-.tag-verification-tags-container input[type=checkbox]:focus + label {
+.tag-verification-vertical .tag-verification-tags-container input[type=checkbox]:focus + label {
     background: #ccc;
+}
+
+.tag-verification-video .tag-verification-tags-container input[type=checkbox]:checked + label {
+    border: 1px solid #FFFFFF;
+}
+
+.tag-verification-video .tag-verification-tags-container input[type=checkbox]:focus + label {
+    background: #065683;
 }
 
 .tag-verification-none-selected-container {
@@ -110,4 +173,38 @@
     margin-right: 8px;
     width: 18px;
     height: 18px;
+}
+
+
+/* loading spinner */
+.tag-verification-container button.loading {
+    padding-left: 40px;
+    position: relative;
+}
+.tag-verification-container button.loading:before {
+    content: "";
+    position: absolute;
+    border-radius: 100%;
+    left: 13px;
+    top: 50%;
+    width: 0px;
+    height: 0px;
+    margin-top: -2px;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-left-color: #FFF;
+    border-top-color: #FFF;
+    animation: spin .6s infinite linear, grow .3s forwards ease-out;
+}
+@keyframes spin {
+    to {
+        transform: rotate(359deg);
+    }
+}
+@keyframes grow {
+    to {
+        width: 14px;
+        height: 14px;
+        margin-top: -8px;
+        right: 13px;
+    }
 }

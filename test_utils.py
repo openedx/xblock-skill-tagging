@@ -22,6 +22,10 @@ class TestBlock(XBlock, SkillTaggingMixin):
     BLOCK_TYPE = "test"
     has_score = False
     display_name = String(scope=Scope.content, name='Test Block')
+    fragment = None
+
+    def student_view(self, context):
+        return self.fragment
 
 
 class TestSkillTaggingMixin(SkillTaggingMixin):
@@ -42,15 +46,14 @@ def make_request(data, method='POST'):
     return request
 
 
-def make_block():
+def make_block(block_type="vertical"):
     """ Instantiate a test XBlock inside a WorkbenchRuntime """
-    block_type = 'test'
     key_store = DictKeyValueStore()
     field_data = KvsFieldData(key_store)
     runtime = WorkbenchRuntime()
     runtime.course_id = "dummy_course_id"
     def_id = runtime.id_generator.create_definition(block_type)
-    usage_id = runtime.id_generator.create_usage(def_id)
+    usage_id = Mock(block_type=block_type, block_id=def_id)
     scope_ids = ScopeIds('user', block_type, def_id, usage_id)
     return TestBlock(runtime, field_data, scope_ids=scope_ids)
 
@@ -62,7 +65,7 @@ class TestCaseMixin:
     VERIFY_TAGS_HANDLER = 'verify_tags'
 
     def setUp(self):
-        self.block = make_block()
+        self.block = make_block(getattr(self, "block_type", "vertical"))
         self.patch_workbench()
         fake_user = Mock()
         fake_user.opt_attrs = {
