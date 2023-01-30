@@ -11,3 +11,17 @@ class SkillTaggingConfig(AppConfig):
     """
 
     name = 'skill_tagging'
+
+    plugin_app = {
+        "signals_config": {
+            "lms.djangoapp": {
+                "relative_path": "handlers",
+                "receivers": [
+                    {
+                        "receiver_func_name": "listen_for_xblock_skill_verified",
+                        "signal_path": "openedx_events.learning.signals.XBLOCK_SKILL_VERIFIED",
+                    },
+                ],
+            }
+        },
+    }
