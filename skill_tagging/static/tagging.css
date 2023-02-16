@@ -93,6 +93,11 @@
     font-size: 18px;
     line-height: 28px;
 }
+
+.tag-verification-vertical p {
+    color: #454545;
+}
+
 .tag-verification-tags-container {
     flex-direction: row;
     align-items: center;
