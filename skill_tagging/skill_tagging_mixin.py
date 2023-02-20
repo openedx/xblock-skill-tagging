@@ -7,6 +7,7 @@ import logging
 from urllib.parse import urljoin
 
 from django.conf import settings
+from django.utils.timezone import datetime, timezone
 from django.utils.translation import gettext as _
 from openedx_events.learning.data import XBlockSkillVerificationData
 from openedx_events.learning.signals import XBLOCK_SKILL_VERIFIED
@@ -100,6 +101,7 @@ class SkillTaggingMixin:
         usage_key = str(self.scope_ids.usage_id)
         if not self.has_verified_tags and (verified_skills or ignored_skills):
             XBLOCK_SKILL_VERIFIED.send_event(
+                time=datetime.now(timezone.utc),
                 xblock_info=XBlockSkillVerificationData(
                     usage_key=usage_key,
                     verified_skills=verified_skills,
