@@ -16,7 +16,7 @@ asgiref==3.6.0
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==2.12.13
+astroid==2.14.2
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -34,16 +34,16 @@ boto==2.49.0
     # via
     #   -r requirements/quality.txt
     #   xblock-sdk
-boto3==1.26.40
+boto3==1.26.74
     # via
     #   -r requirements/quality.txt
     #   fs-s3fs
-botocore==1.29.40
+botocore==1.29.74
     # via
     #   -r requirements/quality.txt
     #   boto3
     #   s3transfer
-build==0.9.0
+build==0.10.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
@@ -57,7 +57,7 @@ chardet==5.1.0
     #   -r requirements/quality.txt
     #   binaryornot
     #   diff-cover
-charset-normalizer==2.1.1
+charset-normalizer==3.0.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -85,13 +85,13 @@ cookiecutter==2.1.1
     # via
     #   -r requirements/quality.txt
     #   xblock-sdk
-coverage[toml]==7.0.1
+coverage[toml]==7.1.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   codecov
     #   pytest-cov
-diff-cover==7.3.0
+diff-cover==7.4.0
     # via -r requirements/dev.in
 dill==0.3.6
     # via
@@ -101,28 +101,24 @@ distlib==0.3.6
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-django==3.2.16
+django==3.2.18
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/quality.txt
     #   django-model-utils
-    #   django-pyfs
     #   djangorestframework
     #   edx-i18n-tools
+    #   openedx-django-pyfs
     #   openedx-events
     #   openedx-filters
     #   xblock-sdk
 django-model-utils==4.3.1
     # via -r requirements/quality.txt
-django-pyfs==3.2.0
-    # via
-    #   -r requirements/quality.txt
-    #   xblock-sdk
 djangorestframework==3.14.0
     # via -r requirements/quality.txt
 edx-i18n-tools==0.9.2
     # via -r requirements/dev.in
-edx-lint==5.3.0
+edx-lint==5.3.2
     # via -r requirements/quality.txt
 edx-opaque-keys[django]==2.3.0
     # via
@@ -132,7 +128,7 @@ exceptiongroup==1.1.0
     # via
     #   -r requirements/quality.txt
     #   pytest
-fastavro==1.7.0
+fastavro==1.7.1
     # via
     #   -r requirements/quality.txt
     #   openedx-events
@@ -144,24 +140,24 @@ filelock==3.9.0
 fs==2.4.16
     # via
     #   -r requirements/quality.txt
-    #   django-pyfs
     #   fs-s3fs
+    #   openedx-django-pyfs
     #   xblock
 fs-s3fs==1.1.1
     # via
     #   -r requirements/quality.txt
-    #   django-pyfs
+    #   openedx-django-pyfs
     #   xblock-sdk
 idna==3.4
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-iniconfig==1.1.1
+iniconfig==2.0.0
     # via
     #   -r requirements/quality.txt
     #   pytest
-isort==5.11.4
+isort==5.12.0
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -184,8 +180,8 @@ jmespath==1.0.1
 lazy==1.5
     # via
     #   -r requirements/quality.txt
-    #   xblock-sdk
-lazy-object-proxy==1.8.0
+    #   xblock
+lazy-object-proxy==1.9.0
     # via
     #   -r requirements/quality.txt
     #   astroid
@@ -194,7 +190,7 @@ lxml==4.9.2
     #   -r requirements/quality.txt
     #   xblock
     #   xblock-sdk
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   -r requirements/quality.txt
     #   jinja2
@@ -203,13 +199,17 @@ mccabe==0.7.0
     # via
     #   -r requirements/quality.txt
     #   pylint
-mock==5.0.0
+mock==5.0.1
     # via -r requirements/quality.txt
-openedx_events @ git+https://github.com/open-craft/openedx-events.git@77ad965c4ac5157b861a19b8cb6b9240883008ba
+openedx-django-pyfs==3.2.1
+    # via
+    #   -r requirements/quality.txt
+    #   xblock
+openedx-events==5.1.0
     # via -r requirements/quality.txt
-openedx-filters @ git+https://github.com/open-craft/openedx-filters.git@d0206cf84f2e5e22b1a99d06566d88839d40b9fe
+openedx-filters==1.1.0
     # via -r requirements/quality.txt
-packaging==22.0
+packaging==23.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/pip-tools.txt
@@ -219,17 +219,13 @@ packaging==22.0
     #   tox
 path==16.6.0
     # via edx-i18n-tools
-pbr==5.11.0
+pbr==5.11.1
     # via
     #   -r requirements/quality.txt
     #   stevedore
-pep517==0.13.0
-    # via
-    #   -r requirements/pip-tools.txt
-    #   build
-pip-tools==6.12.1
+pip-tools==6.12.2
     # via -r requirements/pip-tools.txt
-platformdirs==2.6.2
+platformdirs==3.0.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -250,11 +246,11 @@ py==1.11.0
     #   tox
 pycodestyle==2.10.0
     # via -r requirements/quality.txt
-pydocstyle==6.1.1
+pydocstyle==6.3.0
     # via -r requirements/quality.txt
-pygments==2.13.0
+pygments==2.14.0
     # via diff-cover
-pylint==2.15.9
+pylint==2.16.2
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -282,7 +278,11 @@ pypng==0.20220715.0
     # via
     #   -r requirements/quality.txt
     #   xblock-sdk
-pytest==7.2.0
+pyproject-hooks==1.0.0
+    # via
+    #   -r requirements/pip-tools.txt
+    #   build
+pytest==7.2.1
     # via
     #   -r requirements/quality.txt
     #   pytest-cov
@@ -297,12 +297,12 @@ python-dateutil==2.8.2
     #   arrow
     #   botocore
     #   xblock
-python-slugify==7.0.0
+python-slugify==8.0.0
     # via
     #   -r requirements/quality.txt
     #   code-annotations
     #   cookiecutter
-pytz==2022.7
+pytz==2022.7.1
     # via
     #   -r requirements/quality.txt
     #   django
@@ -315,7 +315,7 @@ pyyaml==6.0
     #   cookiecutter
     #   edx-i18n-tools
     #   xblock
-requests==2.28.1
+requests==2.28.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -326,7 +326,7 @@ s3transfer==0.6.0
     # via
     #   -r requirements/quality.txt
     #   boto3
-simplejson==3.18.0
+simplejson==3.18.3
     # via
     #   -r requirements/quality.txt
     #   xblock-sdk
@@ -347,7 +347,7 @@ sqlparse==0.4.3
     # via
     #   -r requirements/quality.txt
     #   django
-stevedore==4.1.1
+stevedore==5.0.0
     # via
     #   -r requirements/quality.txt
     #   code-annotations
@@ -363,8 +363,8 @@ tomli==2.0.1
     #   -r requirements/quality.txt
     #   build
     #   coverage
-    #   pep517
     #   pylint
+    #   pyproject-hooks
     #   pytest
     #   tox
 tomlkit==0.11.6
@@ -378,18 +378,18 @@ tox==3.28.0
     #   tox-battery
 tox-battery==0.6.1
     # via -r requirements/ci.txt
-typing-extensions==4.4.0
+typing-extensions==4.5.0
     # via
     #   -r requirements/quality.txt
     #   astroid
     #   pylint
-urllib3==1.26.13
+urllib3==1.26.14
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   botocore
     #   requests
-virtualenv==20.17.1
+virtualenv==20.19.0
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -411,11 +411,11 @@ wrapt==1.14.1
     # via
     #   -r requirements/quality.txt
     #   astroid
-xblock==1.6.1
+xblock[django]==1.6.2
     # via
     #   -r requirements/quality.txt
     #   xblock-sdk
-xblock-sdk==0.5.1
+xblock-sdk==0.5.4
     # via -r requirements/quality.txt
 
 # The following packages are considered to be unsafe in a requirements file:

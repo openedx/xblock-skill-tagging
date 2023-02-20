@@ -40,7 +40,7 @@
     font-weight: 700;
     font-size: 32px;
     line-height: 28px;
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 
 .tag-verification-vertical button {
@@ -51,6 +51,8 @@
 .tag-verification-video button {
     background: white;
     color: #00262B;
+    width: fit-content;
+    align-self: center;
 }
 
 .tag-verification-container button {
@@ -61,8 +63,14 @@
     box-shadow: none;
 }
 
+.tag-verification-video .tag-verification-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .tag-verification-video p {
     width: 465px;
+    align-self: center;
 }
 
 .tag-verification-vertical button:hover, .tag-verification-vertical button:focus {
@@ -85,6 +93,11 @@
     font-size: 18px;
     line-height: 28px;
 }
+
+.tag-verification-vertical p {
+    color: #454545;
+}
+
 .tag-verification-tags-container {
     flex-direction: row;
     align-items: center;
@@ -104,6 +117,7 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 24px;
+    margin-bottom: 0px;
 }
 
 .tag-verification-vertical .tag-verification-chip {
@@ -123,7 +137,7 @@
 }
 
 .tag-verification-video .tag-verification-chip.tag-verification-chip-hover:hover {
-    background: #065683;
+    background: #576D71;
 }
 
 .tag-verification-chip-clickable {
@@ -152,7 +166,7 @@
 }
 
 .tag-verification-video .tag-verification-tags-container input[type=checkbox]:focus + label {
-    background: #065683;
+    background: #576D71;
 }
 
 .tag-verification-none-selected-container {
@@ -181,6 +195,7 @@
     padding-left: 40px;
     position: relative;
 }
+
 .tag-verification-container button.loading:before {
     content: "";
     position: absolute;
@@ -190,11 +205,19 @@
     width: 0px;
     height: 0px;
     margin-top: -2px;
-    border: 2px solid rgba(255,255,255,0.5);
-    border-left-color: #FFF;
-    border-top-color: #FFF;
     animation: spin .6s infinite linear, grow .3s forwards ease-out;
 }
+
+.tag-verification-vertical button.loading:before {
+    border: 2px solid rgba(255,255,255,0.5);
+    border-top-color: #FFF;
+}
+
+.tag-verification-video button.loading:before {
+    border: 2px solid rgba(0,0,0,1);
+    border-top-color: #FFF;
+}
+
 @keyframes spin {
     to {
         transform: rotate(359deg);
@@ -207,4 +230,8 @@
         margin-top: -8px;
         right: 13px;
     }
+}
+
+.tag-verification-container button[disabled] {
+    opacity: 0.3;
 }

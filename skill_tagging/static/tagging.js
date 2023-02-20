@@ -86,15 +86,22 @@ function tagVerificationVerifyTags(source, url, blockId) {
     });
 }
 
+window.tagVerificationSelectionHistoryObject = window.tagVerificationSelectionHistoryObject || {};
+
 function tagVerificationOnNoneCheckboxClick(source, blockId) {
-  tagVerificationToggleSubmitButton(blockId);
-  if (!source.checked) {
-    return;
-  }
   checkboxes = document.getElementsByName(`tag-verification-skills-${blockId}`);
-  for (var i = 0, n = checkboxes.length; i < n; i++) {
-    checkboxes[i].checked = false;
+  if (source.checked) {
+    window.tagVerificationSelectionHistoryObject[blockId] = {};
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+      window.tagVerificationSelectionHistoryObject[blockId][checkboxes[i].id] = checkboxes[i].checked;
+      checkboxes[i].checked = false;
+    }
+  } else {
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+      checkboxes[i].checked = window.tagVerificationSelectionHistoryObject[blockId][checkboxes[i].id];
+    }
   }
+  tagVerificationToggleSubmitButton(blockId);
 }
 
 function tagVerificationRetry(blockId) {
