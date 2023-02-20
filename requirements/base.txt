@@ -21,9 +21,9 @@ edx-opaque-keys[django]==2.3.0
     # via openedx-events
 fastavro==1.7.1
     # via openedx-events
-openedx_events @ git+https://github.com/open-craft/openedx-events.git@77ad965c4ac5157b861a19b8cb6b9240883008ba
+openedx-events==5.1.0
     # via -r requirements/base.in
-openedx-filters @ git+https://github.com/open-craft/openedx-filters.git@ae45fdf1a5d96b766ed5c2dba3680fc691ac118a
+openedx-filters==1.1.0
     # via -r requirements/base.in
 pbr==5.11.1
     # via stevedore

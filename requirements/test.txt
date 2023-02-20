@@ -21,9 +21,9 @@ binaryornot==0.4.4
     # via cookiecutter
 boto==2.49.0
     # via xblock-sdk
-boto3==1.26.72
+boto3==1.26.74
     # via fs-s3fs
-botocore==1.29.72
+botocore==1.29.74
     # via
     #   boto3
     #   s3transfer
@@ -104,9 +104,9 @@ mock==5.0.1
     # via -r requirements/test.in
 openedx-django-pyfs==3.2.1
     # via xblock
-openedx_events @ git+https://github.com/open-craft/openedx-events.git@77ad965c4ac5157b861a19b8cb6b9240883008ba
+openedx-events==5.1.0
     # via -r requirements/base.txt
-openedx-filters @ git+https://github.com/open-craft/openedx-filters.git@ae45fdf1a5d96b766ed5c2dba3680fc691ac118a
+openedx-filters==1.1.0
     # via -r requirements/base.txt
 packaging==23.0
     # via pytest
