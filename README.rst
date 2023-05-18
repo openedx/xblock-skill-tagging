@@ -1,28 +1,111 @@
 skill_tagging
 #############################
 
-.. note::
-
-  This README was auto-generated. Maintainer: please review its contents and
-  update all relevant sections. Instructions to you are marked with
-  "PLACEHOLDER" or "TODO". Update or remove those sections, and remove this
-  note when you are done.
-
 |pypi-badge| |ci-badge| |codecov-badge| |doc-badge| |pyversions-badge|
 |license-badge| |status-badge|
 
-Purpose
-*******
+Overview
+********
 
-Django app plugin for fetching and verifying tags for xblock skills.
+Django app for fetching and verifying tags/skills for video and vertical/unit
+XBlocks. It implements two openedx_filters pipelines to inject a form into the end
+unit XBlocks and video XBlocks.
 
-Set ``SHOW_SKILL_VERIFICATION_PROBABILITY`` in your django settings to configure
-probability of displaying verification form. Values in range 0 to 1 are
-allowed, where 0 means never and 1 means always display. Default value is 0.5
-i.e. 50% chance of displaying the form.
+.. image:: https://user-images.githubusercontent.com/10894099/210078679-3cbac3d1-55a7-4fba-b841-7fb4468f32c5.png
+   :target: https://user-images.githubusercontent.com/10894099/210078679-3cbac3d1-55a7-4fba-b841-7fb4468f32c5.png
+   :alt: vertical block verification form
+
+.. image:: https://user-images.githubusercontent.com/10894099/212285572-efa5cfd5-e9c5-411d-8d15-541c43445ec0.png
+   :target: https://user-images.githubusercontent.com/10894099/212285572-efa5cfd5-e9c5-411d-8d15-541c43445ec0.png
+   :alt: video block verification form
+
+More information about the XBlock skill tagging design can be found in this
+`ADR`_.
+
+.. _ADR: https://github.com/openedx/taxonomy-connector/blob/master/docs/decisions/0001-xblock-skill-tagging-design.rst
+
 
 Getting Started
 ***************
+
+To install ``skill_tagging`` in `edx-platform`_, run
+
+.. code-block::
+
+   pip install skill_tagging
+
+   # to install a development version locally in devstack
+   # clone this repo in `<devstack_base_dir>/src` directory and run
+   pip install -e /edx/src/xblock-skill-tagging
+
+.. _edx-platform: https://github.com/openedx/edx-platform
+
+This repo depends on discovery service for fetching skills/tags for a given
+XBlock which depends on `taxonomy-connector`_ plugin for generating and serving these
+tags. Setup ``taxonomy-connector`` plugin in `course-discovery`_ by installing it
+via pip:
+
+.. code-block::
+
+   pip install taxonomy-connector
+
+   # to install a development version locally in devstack
+   # clone this repo in `<devstack_base_dir>/src` directory and run
+   pip install -e /edx/src/taxonomy_connector
+
+.. _taxonomy-connector: https://github.com/openedx/taxonomy-connector
+.. _course-discovery: https://github.com/openedx/course-discovery
+
+Whenever a user verifies tags/skills for an XBlock, ``skill_tagging`` `emits`_ an
+openedx_event called ``XBLOCK_SKILL_VERIFIED``. This event needs to be consumed
+by course discovery to make sure that the verification count is incremented for
+that skill/tag.
+
+To produce and consume this event, setup an implementation of event bus
+like `event_bus_kafka`_ or `event_bus_redis`_. `How to start using the Event Bus`_
+has detailed information on setting up event bus. The host would be
+``edx-platform`` while ``course-discovery`` will be the consumer for the event
+bus.
+
+.. _emits: https://github.com/openedx/xblock-skill-tagging/blob/b323d8b13b66a69326b8fad77ccba4631dbdece9/skill_tagging/skill_tagging_mixin.py#L103
+.. _event_bus_kafka: https://github.com/openedx/event-bus-kafka
+.. _event_bus_redis: https://github.com/openedx/event-bus-redis
+.. _How to start using the Event Bus: https://openedx.atlassian.net/wiki/spaces/AC/pages/3508699151/How+to+start+using+the+Event+Bus
+
+Configuration
+=============
+
+Add following configuration values to the host django settings, i.e. LMS
+settings: ``lms/envs/common.py``
+
+.. code-block:: python
+
+   from .common import XBLOCK_MIXINS
+   # Below mixin adds the ability to fetch skills/tags from discovery and update them.
+   XBLOCK_MIXINS += ('skill_tagging.skill_tagging_mixin.SkillTaggingMixin',)
+   # Set below url to point to discovery service.
+   TAXONOMY_API_BASE_URL='http://edx.devstack.discovery:18381'
+   # Configure the maximum number skills/tags to display in the form for a given xblock.
+   TAXONOMY_API_SKILL_PAGE_SIZE=20
+   # Copy this as is, this configures the required openedx_filters.
+   OPEN_EDX_FILTERS_CONFIG = {
+       "org.openedx.learning.vertical_block.render.completed.v1": {
+           "fail_silently": False,
+           "pipeline": [
+               "skill_tagging.pipeline.AddVerticalBlockSkillVerificationSection",
+           ]
+       },
+       "org.openedx.learning.vertical_block_child.render.started.v1": {
+           "fail_silently": False,
+           "pipeline": [
+               "skill_tagging.pipeline.AddVideoBlockSkillVerificationComponent",
+           ]
+       }
+   }
+   # helps to configure probability of displaying the verification forms. Values in range 0 to 1 are allowed, where 0
+   # means never and 1 means always display. Default value is 0.5 i.e. 50% chance of displaying the form.
+   SHOW_SKILL_VERIFICATION_PROBABILITY = 0.5
+
 
 Developing
 ==========
@@ -74,15 +157,11 @@ Every time you develop something in this repo
 
   # Open a PR and ask for review.
 
+
 Deploying
 =========
 
-TODO: How can a new user go about deploying this component? Is it just a few
-commands? Is there a larger how-to that should be linked here?
-
-PLACEHOLDER: For details on how to deploy this component, see the `deployment how-to`_
-
-.. _deployment how-to: https://docs.openedx.org/projects/xblock-skill-tagging/how-tos/how-to-deploy-this-component.html
+This package is automatically published to pypi whenever a new tag is pushed to the repository.
 
 Getting Help
 ************
@@ -90,11 +169,7 @@ Getting Help
 Documentation
 =============
 
-PLACEHOLDER: Start by going through `the documentation`_.  If you need more help see below.
-
-.. _the documentation: https://docs.openedx.org/projects/xblock-skill-tagging
-
-(TODO: `Set up documentation <https://openedx.atlassian.net/wiki/spaces/DOC/pages/21627535/Publish+Documentation+on+Read+the+Docs>`_)
+Published documentation is not available.
 
 More Help
 =========
@@ -160,8 +235,8 @@ Reporting Security Issues
 
 Please do not report security issues in public. Please email security@tcril.org.
 
-.. |pypi-badge| image:: https://img.shields.io/pypi/v/xblock-skill-tagging.svg
-    :target: https://pypi.python.org/pypi/xblock-skill-tagging/
+.. |pypi-badge| image:: https://img.shields.io/pypi/v/skill_tagging.svg
+    :target: https://pypi.python.org/pypi/skill_tagging/
     :alt: PyPI
 
 .. |ci-badge| image:: https://github.com/openedx/xblock-skill-tagging/workflows/Python%20CI/badge.svg?branch=main
@@ -176,8 +251,8 @@ Please do not report security issues in public. Please email security@tcril.org.
     :target: https://xblock-skill-tagging.readthedocs.io/en/latest/
     :alt: Documentation
 
-.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/xblock-skill-tagging.svg
-    :target: https://pypi.python.org/pypi/xblock-skill-tagging/
+.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/skill_tagging.svg
+    :target: https://pypi.python.org/pypi/skill_tagging/
     :alt: Supported Python versions
 
 .. |license-badge| image:: https://img.shields.io/github/license/openedx/xblock-skill-tagging.svg
