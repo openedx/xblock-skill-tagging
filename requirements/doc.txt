@@ -14,16 +14,15 @@ arrow==1.2.3
     # via
     #   -r requirements/test.txt
     #   jinja2-time
-asgiref==3.6.0
+asgiref==3.7.2
     # via
     #   -r requirements/test.txt
     #   django
-attrs==22.2.0
+attrs==23.1.0
     # via
     #   -r requirements/test.txt
     #   openedx-events
-    #   pytest
-babel==2.11.0
+babel==2.12.1
     # via sphinx
 binaryornot==0.4.4
     # via
@@ -31,22 +30,18 @@ binaryornot==0.4.4
     #   cookiecutter
 bleach==6.0.0
     # via readme-renderer
-boto==2.49.0
-    # via
-    #   -r requirements/test.txt
-    #   xblock-sdk
-boto3==1.26.74
+boto3==1.26.153
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.29.74
+botocore==1.29.153
     # via
     #   -r requirements/test.txt
     #   boto3
     #   s3transfer
 build==0.10.0
     # via -r requirements/doc.in
-certifi==2022.12.7
+certifi==2023.5.7
     # via
     #   -r requirements/test.txt
     #   requests
@@ -56,7 +51,7 @@ chardet==5.1.0
     # via
     #   -r requirements/test.txt
     #   binaryornot
-charset-normalizer==3.0.1
+charset-normalizer==3.1.0
     # via
     #   -r requirements/test.txt
     #   requests
@@ -71,13 +66,13 @@ cookiecutter==2.1.1
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
-coverage[toml]==7.1.0
+coverage[toml]==7.2.7
     # via
     #   -r requirements/test.txt
     #   pytest-cov
-cryptography==39.0.1
+cryptography==41.0.1
     # via secretstorage
-django==3.2.18
+django==3.2.19
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/test.txt
@@ -103,11 +98,11 @@ edx-opaque-keys[django]==2.3.0
     # via
     #   -r requirements/test.txt
     #   openedx-events
-exceptiongroup==1.1.0
+exceptiongroup==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
-fastavro==1.7.1
+fastavro==1.7.4
     # via
     #   -r requirements/test.txt
     #   openedx-events
@@ -128,7 +123,7 @@ idna==3.4
     #   requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==6.0.0
+importlib-metadata==6.6.0
     # via
     #   keyring
     #   sphinx
@@ -172,28 +167,28 @@ lxml==4.9.2
     #   -r requirements/test.txt
     #   xblock
     #   xblock-sdk
-markdown-it-py==2.1.0
+markdown-it-py==3.0.0
     # via rich
-markupsafe==2.1.2
+markupsafe==2.1.3
     # via
     #   -r requirements/test.txt
     #   jinja2
     #   xblock
 mdurl==0.1.2
     # via markdown-it-py
-mock==5.0.1
+mock==5.0.2
     # via -r requirements/test.txt
-more-itertools==9.0.0
+more-itertools==9.1.0
     # via jaraco-classes
-openedx-django-pyfs==3.2.1
+openedx-django-pyfs==3.3.0
     # via
     #   -r requirements/test.txt
     #   xblock
-openedx-events==5.1.0
+openedx-events==8.0.1
     # via -r requirements/test.txt
-openedx-filters==1.1.0
+openedx-filters==1.3.0
     # via -r requirements/test.txt
-packaging==23.0
+packaging==23.1
     # via
     #   -r requirements/test.txt
     #   build
@@ -211,7 +206,7 @@ pluggy==1.0.0
     #   pytest
 pycparser==2.21
     # via cffi
-pygments==2.14.0
+pygments==2.15.1
     # via
     #   doc8
     #   readme-renderer
@@ -227,12 +222,12 @@ pypng==0.20220715.0
     #   xblock-sdk
 pyproject-hooks==1.0.0
     # via build
-pytest==7.2.1
+pytest==7.3.2
     # via
     #   -r requirements/test.txt
     #   pytest-cov
     #   pytest-django
-pytest-cov==4.0.0
+pytest-cov==4.1.0
     # via -r requirements/test.txt
 pytest-django==4.5.2
     # via -r requirements/test.txt
@@ -242,12 +237,12 @@ python-dateutil==2.8.2
     #   arrow
     #   botocore
     #   xblock
-python-slugify==8.0.0
+python-slugify==8.0.1
     # via
     #   -r requirements/test.txt
     #   code-annotations
     #   cookiecutter
-pytz==2022.7.1
+pytz==2023.3
     # via
     #   -r requirements/test.txt
     #   babel
@@ -262,7 +257,7 @@ pyyaml==6.0
     #   xblock
 readme-renderer==37.3
     # via twine
-requests==2.28.2
+requests==2.31.0
     # via
     #   -r requirements/test.txt
     #   cookiecutter
@@ -270,21 +265,21 @@ requests==2.28.2
     #   sphinx
     #   twine
     #   xblock-sdk
-requests-toolbelt==0.10.1
+requests-toolbelt==1.0.0
     # via twine
 restructuredtext-lint==1.4.0
     # via doc8
 rfc3986==2.0.0
     # via twine
-rich==13.3.1
+rich==13.4.2
     # via twine
-s3transfer==0.6.0
+s3transfer==0.6.1
     # via
     #   -r requirements/test.txt
     #   boto3
 secretstorage==3.3.3
     # via keyring
-simplejson==3.18.3
+simplejson==3.19.1
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
@@ -313,11 +308,11 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlparse==0.4.3
+sqlparse==0.4.4
     # via
     #   -r requirements/test.txt
     #   django
-stevedore==5.0.0
+stevedore==5.1.0
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -337,9 +332,12 @@ tomli==2.0.1
     #   pytest
 twine==4.0.2
     # via -r requirements/doc.in
-typing-extensions==4.5.0
-    # via rich
-urllib3==1.26.14
+typing-extensions==4.6.3
+    # via
+    #   -r requirements/test.txt
+    #   asgiref
+    #   rich
+urllib3==1.26.16
     # via
     #   -r requirements/test.txt
     #   botocore
@@ -361,9 +359,9 @@ xblock[django]==1.6.2
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
-xblock-sdk==0.5.4
+xblock-sdk==0.6.0
     # via -r requirements/test.txt
-zipp==3.14.0
+zipp==3.15.0
     # via
     #   importlib-metadata
     #   importlib-resources
