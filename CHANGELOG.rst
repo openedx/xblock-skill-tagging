@@ -16,6 +16,14 @@ Unreleased
 
 *
 
+[0.1.1] - 2023-06-14
+************************************************
+
+Added
+=====
+
+* Add temporary option to configure topic name for skill-verified event.
+
 [0.1.0] - 2022-12-01
 ************************************************
 
