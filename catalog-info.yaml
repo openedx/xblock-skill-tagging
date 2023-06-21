@@ -2,7 +2,7 @@
 # https://open-edx-proposals.readthedocs.io/en/latest/processes/oep-0055-proc-project-maintainers.html
 
 apiVersion: backstage.io/v1alpha1
-kind: ""
+kind: Component
 metadata:
   name: 'xblock-skill-tagging'
   description: "Django app plugin for fetching and verifying tags for xblock skills."
@@ -13,20 +13,9 @@ metadata:
     # component.
     openedx.org/arch-interest-groups: ""
 spec:
-
-  # (Required) This can be a group(`group:<group_name>` or a user(`user:<github_username>`)
-  owner: ""
-
-  # (Required) Acceptable Type Values: service, website, library
-  type: ''
-
-  # (Required) Acceptable Lifecycle Values: experimental, production, deprecated
-  lifecycle: 'experimental'
-
-  # (Optional) The value can be the name of any known component.
-  subcomponentOf: '<name_of_a_component>'
-
-  # (Optional) An array of different components or resources.
+  owner: group:2u-xblockskilltagging-maintainers
+  type: 'library'
+  lifecycle: 'production'
   dependsOn:
-  - '<component_or_resource>'
-  - '<another_component_or_resource>'
+  - 'edx-platform'
+  - 'taxonomy-connector'
