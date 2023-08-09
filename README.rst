@@ -67,7 +67,7 @@ has detailed information on setting up event bus. The host would be
 ``edx-platform`` while ``course-discovery`` will be the consumer for the event
 bus.
 
-.. _emits: https://github.com/openedx/xblock-skill-tagging/blob/b323d8b13b66a69326b8fad77ccba4631dbdece9/skill_tagging/skill_tagging_mixin.py#L103
+.. _emits: https://github.com/openedx/xblock-skill-tagging/blob/main/skill_tagging/handlers.py
 .. _event_bus_kafka: https://github.com/openedx/event-bus-kafka
 .. _event_bus_redis: https://github.com/openedx/event-bus-redis
 .. _How to start using the Event Bus: https://openedx.atlassian.net/wiki/spaces/AC/pages/3508699151/How+to+start+using+the+Event+Bus
@@ -105,6 +105,8 @@ settings: ``lms/envs/common.py``
    # helps to configure probability of displaying the verification forms. Values in range 0 to 1 are allowed, where 0
    # means never and 1 means always display. Default value is 0.5 i.e. 50% chance of displaying the form.
    SHOW_SKILL_VERIFICATION_PROBABILITY = 0.5
+   # Optionally update topic name for verification event emitted when a user verifies tags for an xblock.
+   EVENT_BUS_XBLOCK_VERIFICATION_TOPIC = "learning-custom-xblock-skill-verfied"
 
 
 Developing
