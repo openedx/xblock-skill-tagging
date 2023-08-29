@@ -16,6 +16,15 @@ Unreleased
 
 *
 
+[0.2.0] - 2024-02-09
+************************************************
+
+Changed
+=======
+
+* Remove hard coded signal handler so that openedx_events producer config can
+  be used to push events to event bus in a configurable way.
+
 [0.1.7] - 2024-01-31
 ************************************************
 
