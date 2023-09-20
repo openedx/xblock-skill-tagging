@@ -82,8 +82,11 @@ class AddVerticalBlockSkillVerificationSection(VerificationPipelineBase, Pipelin
     def run_filter(self, block, fragment, context, view):  # pylint: disable=arguments-differ
         """Pipeline Step implementing the Filter"""
 
+        # Check whether we need to run this filter and only call the API.
+        if not self.should_run_filter():
+            return {"block": block, "fragment": fragment, "context": context, "view": view}
         skills = self.fetch_related_skills(block)
-        if not skills or not self.should_run_filter():
+        if not skills:
             return {"block": block, "fragment": fragment, "context": context, "view": view}
         usage_id = block.scope_ids.usage_id
         data = self.get_skill_context(usage_id, block, skills)
@@ -116,11 +119,11 @@ class AddVideoBlockSkillVerificationComponent(VerificationPipelineBase, Pipeline
     def run_filter(self, block, context):  # pylint: disable=arguments-differ
         """Pipeline Step implementing the Filter"""
         usage_id = block.scope_ids.usage_id
-        if usage_id.block_type != "video":
+        if usage_id.block_type != "video" or not self.should_run_filter():
             # avoid fetching skills for other xblocks
             return {"block": block, "context": context}
         skills = self.fetch_related_skills(block)
-        if not skills or not self.should_run_filter():
+        if not skills:
             return {"block": block, "context": context}
         data = self.get_skill_context(usage_id, block, skills)
 
