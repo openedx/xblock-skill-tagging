@@ -71,7 +71,7 @@ class SkillTaggingMixin(metaclass=NamedAttributesMetaclass):
         usage_id_str = str(self.scope_ids.usage_id)
         XBLOCK_SKILL_TAGS_API = urljoin(
             settings.TAXONOMY_API_BASE_URL,
-            '/taxonomy/api/v1/xblocks'
+            '/taxonomy/api/v1/xblocks/'
         )
         response = api_client.get(
             XBLOCK_SKILL_TAGS_API,
