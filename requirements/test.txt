@@ -6,8 +6,8 @@
 #
 appdirs==1.4.4
     # via fs
-arrow==1.2.3
-    # via jinja2-time
+arrow==1.3.0
+    # via cookiecutter
 asgiref==3.7.2
     # via
     #   -r requirements/base.txt
@@ -16,36 +16,40 @@ attrs==23.1.0
     # via
     #   -r requirements/base.txt
     #   openedx-events
+backports-zoneinfo==0.2.1
+    # via
+    #   -r requirements/base.txt
+    #   django
 binaryornot==0.4.4
     # via cookiecutter
-boto3==1.26.153
+boto3==1.28.72
     # via fs-s3fs
-botocore==1.29.153
+botocore==1.31.72
     # via
     #   boto3
     #   s3transfer
-certifi==2023.5.7
+certifi==2023.7.22
     # via requests
-chardet==5.1.0
+chardet==5.2.0
     # via binaryornot
-charset-normalizer==3.1.0
+charset-normalizer==3.3.1
     # via requests
-click==8.1.3
+click==8.1.7
     # via
     #   code-annotations
     #   cookiecutter
-code-annotations==1.3.0
+code-annotations==1.5.0
     # via -r requirements/test.in
-cookiecutter==2.1.1
+cookiecutter==2.4.0
     # via xblock-sdk
-coverage[toml]==7.2.7
-    # via pytest-cov
+coverage[toml]==7.3.2
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   coverage
+    #   pytest-cov
+    # via
     #   -r requirements/base.txt
     #   django-model-utils
     #   djangorestframework
-    #   openedx-django-pyfs
     #   openedx-events
     #   openedx-filters
     #   xblock-sdk
@@ -53,25 +57,23 @@ django-model-utils==4.3.1
     # via -r requirements/base.txt
 djangorestframework==3.14.0
     # via -r requirements/test.in
-edx-opaque-keys[django]==2.3.0
+edx-opaque-keys[django]==2.5.1
     # via
     #   -r requirements/base.txt
+    #   edx-opaque-keys
     #   openedx-events
-exceptiongroup==1.1.1
+exceptiongroup==1.1.3
     # via pytest
-fastavro==1.7.4
+fastavro==1.8.4
     # via
     #   -r requirements/base.txt
     #   openedx-events
 fs==2.4.16
     # via
     #   fs-s3fs
-    #   openedx-django-pyfs
     #   xblock
 fs-s3fs==1.1.1
-    # via
-    #   openedx-django-pyfs
-    #   xblock-sdk
+    # via xblock-sdk
 idna==3.4
     # via requests
 iniconfig==2.0.0
@@ -80,46 +82,48 @@ jinja2==3.1.2
     # via
     #   code-annotations
     #   cookiecutter
-    #   jinja2-time
-jinja2-time==0.2.0
-    # via cookiecutter
 jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-lazy==1.5
-    # via xblock
-lxml==4.9.2
+lxml==4.9.3
     # via
     #   xblock
     #   xblock-sdk
+mako==1.2.4
+    # via xblock
+markdown-it-py==3.0.0
+    # via rich
 markupsafe==2.1.3
     # via
     #   jinja2
+    #   mako
     #   xblock
-mock==5.0.2
+mdurl==0.1.2
+    # via markdown-it-py
+mock==5.1.0
     # via -r requirements/test.in
-openedx-django-pyfs==3.3.0
-    # via xblock
-openedx-events==8.0.1
+openedx-events==9.0.0
     # via -r requirements/base.txt
-openedx-filters==1.3.0
+openedx-filters==1.6.0
     # via -r requirements/base.txt
-packaging==23.1
+packaging==23.2
     # via pytest
 pbr==5.11.1
     # via
     #   -r requirements/base.txt
     #   stevedore
-pluggy==1.0.0
+pluggy==1.3.0
     # via pytest
+pygments==2.16.1
+    # via rich
 pymongo==3.13.0
     # via
     #   -r requirements/base.txt
     #   edx-opaque-keys
 pypng==0.20220715.0
     # via xblock-sdk
-pytest==7.3.2
+pytest==7.4.3
     # via
     #   pytest-cov
     #   pytest-django
@@ -136,13 +140,11 @@ python-slugify==8.0.1
     # via
     #   code-annotations
     #   cookiecutter
-pytz==2023.3
+pytz==2023.3.post1
     # via
-    #   -r requirements/base.txt
-    #   django
     #   djangorestframework
     #   xblock
-pyyaml==6.0
+pyyaml==6.0.1
     # via
     #   code-annotations
     #   cookiecutter
@@ -151,10 +153,14 @@ requests==2.31.0
     # via
     #   cookiecutter
     #   xblock-sdk
-s3transfer==0.6.1
+rich==13.6.0
+    # via cookiecutter
+s3transfer==0.7.0
     # via boto3
-simplejson==3.19.1
-    # via xblock-sdk
+simplejson==3.19.2
+    # via
+    #   xblock
+    #   xblock-sdk
 six==1.16.0
     # via
     #   fs
@@ -175,15 +181,19 @@ tomli==2.0.1
     # via
     #   coverage
     #   pytest
-typing-extensions==4.6.3
+types-python-dateutil==2.8.19.14
+    # via arrow
+typing-extensions==4.8.0
     # via
     #   -r requirements/base.txt
     #   asgiref
-urllib3==1.26.16
+    #   edx-opaque-keys
+    #   rich
+urllib3==1.26.18
     # via
     #   botocore
     #   requests
-web-fragments==2.0.0
+web-fragments==2.1.0
     # via
     #   xblock
     #   xblock-sdk
@@ -191,9 +201,9 @@ webob==1.8.7
     # via
     #   xblock
     #   xblock-sdk
-xblock[django]==1.6.2
+xblock==1.8.1
     # via xblock-sdk
-xblock-sdk==0.6.0
+xblock-sdk==0.7.0
     # via -r requirements/test.in
 
 # The following packages are considered to be unsafe in a requirements file:
