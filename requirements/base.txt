@@ -8,32 +8,33 @@ asgiref==3.7.2
     # via django
 attrs==23.1.0
     # via openedx-events
-django==3.2.19
+backports-zoneinfo==0.2.1
+    # via django
+django==4.2.6
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
     #   django-model-utils
     #   openedx-events
     #   openedx-filters
 django-model-utils==4.3.1
     # via -r requirements/base.in
-edx-opaque-keys[django]==2.3.0
+edx-opaque-keys[django]==2.5.1
     # via openedx-events
-fastavro==1.7.4
+fastavro==1.8.4
     # via openedx-events
-openedx-events==8.0.1
+openedx-events==9.0.0
     # via -r requirements/base.in
-openedx-filters==1.3.0
+openedx-filters==1.6.0
     # via -r requirements/base.in
 pbr==5.11.1
     # via stevedore
 pymongo==3.13.0
     # via edx-opaque-keys
-pytz==2023.3
-    # via django
 sqlparse==0.4.4
     # via django
 stevedore==5.1.0
     # via edx-opaque-keys
-typing-extensions==4.6.3
-    # via asgiref
+typing-extensions==4.8.0
+    # via
+    #   asgiref
+    #   edx-opaque-keys
