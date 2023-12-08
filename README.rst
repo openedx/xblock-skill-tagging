@@ -107,10 +107,12 @@ settings: ``lms/envs/common.py``
    SHOW_SKILL_VERIFICATION_PROBABILITY = 0.5
    # Include the XBLOCK_SKILL_VERIFIED signal in `EVENT_BUS_PRODUCER_CONFIG` to push the event to event bus
    # Note: Include `openedx_events` in `INSTALLED_APPS` setting in the host application
+   # See https://docs.openedx.org/projects/openedx-events/en/latest/decisions/0014-new-event-bus-producer-config.html
+   # for more information about EVENT_BUS_PRODUCER_CONFIG
    EVENT_BUS_PRODUCER_CONFIG = {
-       'org.openedx.learning.xblock.skill.verified.v1': [
-           {'topic': 'learning-custom-xblock-skill-verfied', 'event_key_field': 'xblock_info.usage_key', 'enabled': True},
-       ],
+       'org.openedx.learning.xblock.skill.verified.v1': {
+           'learning-xblock-skill-verfied': {'event_key_field': 'xblock_info.usage_key', 'enabled': True}
+       },
    }
 
 Developing
