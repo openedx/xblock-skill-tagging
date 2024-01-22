@@ -85,9 +85,17 @@ class AddVerticalBlockSkillVerificationSection(VerificationPipelineBase, Pipelin
         # Check whether we need to run this filter and only call the API.
         if not self.should_run_filter():
             return {"block": block, "fragment": fragment, "context": context, "view": view}
+        logger.info(
+            "[Xblock-Skill-Tagging] Filter run for AddVerticalBlockSkillVerificationSection. Block-ID: %s",
+            str(block.scope_ids.usage_id.block_id)
+        )
         skills = self.fetch_related_skills(block)
         if not skills:
             return {"block": block, "fragment": fragment, "context": context, "view": view}
+        logger.info(
+            "[Xblock-Skill-Tagging] Skills found for AddVerticalBlockSkillVerificationSection. Block-ID: %s",
+            str(block.scope_ids.usage_id.block_id)
+        )
         usage_id = block.scope_ids.usage_id
         data = self.get_skill_context(usage_id, block, skills)
         html = resource_string("static/tagging.html")
@@ -122,9 +130,17 @@ class AddVideoBlockSkillVerificationComponent(VerificationPipelineBase, Pipeline
         if usage_id.block_type != "video" or not self.should_run_filter():
             # avoid fetching skills for other xblocks
             return {"block": block, "context": context}
+        logger.info(
+            "[Xblock-Skill-Tagging] Filter run for AddVideoBlockSkillVerificationComponent. Block-ID: %s",
+            str(block.scope_ids.usage_id.block_id)
+        )
         skills = self.fetch_related_skills(block)
         if not skills:
             return {"block": block, "context": context}
+        logger.info(
+            "[Xblock-Skill-Tagging] Skills found for AddVideoBlockSkillVerificationComponent. Block-ID: %s",
+            str(block.scope_ids.usage_id.block_id)
+        )
         data = self.get_skill_context(usage_id, block, skills)
 
         def wrapper(fn):
