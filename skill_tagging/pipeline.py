@@ -10,7 +10,7 @@ from django.template import Context, Template
 from openedx_filters import PipelineStep
 
 logger = logging.getLogger(__name__)
-DEFAULT_PROBABILITY = 0.5
+DEFAULT_PROBABILITY = 0.03
 
 
 def resource_string(path):
@@ -84,10 +84,6 @@ class AddVerticalBlockSkillVerificationSection(VerificationPipelineBase, Pipelin
 
         # Check whether we need to run this filter and only call the API.
         if not self.should_run_filter():
-            logger.info(
-                "[Xblock-Skill-Tagging] Filter aborted for vertical block. Block-ID: %s",
-                str(block.scope_ids.usage_id.block_id)
-            )
             return {"block": block, "fragment": fragment, "context": context, "view": view}
         skills = self.fetch_related_skills(block)
         if not skills:
@@ -128,10 +124,6 @@ class AddVideoBlockSkillVerificationComponent(VerificationPipelineBase, Pipeline
         """Pipeline Step implementing the Filter"""
         usage_id = block.scope_ids.usage_id
         if usage_id.block_type != "video" or not self.should_run_filter():
-            logger.info(
-                "[Xblock-Skill-Tagging] Filter aborted for block. Block-ID: %s",
-                str(block.scope_ids.usage_id.block_id)
-            )
             # avoid fetching skills for other xblocks
             return {"block": block, "context": context}
         skills = self.fetch_related_skills(block)
