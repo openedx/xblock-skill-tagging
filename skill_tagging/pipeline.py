@@ -87,10 +87,6 @@ class AddVerticalBlockSkillVerificationSection(VerificationPipelineBase, Pipelin
             return {"block": block, "fragment": fragment, "context": context, "view": view}
         skills = self.fetch_related_skills(block)
         if not skills:
-            logger.info(
-                "[Xblock-Skill-Tagging] Skills missing for vertical block. Block-ID: %s",
-                str(block.scope_ids.usage_id.block_id)
-            )
             return {"block": block, "fragment": fragment, "context": context, "view": view}
         usage_id = block.scope_ids.usage_id
         data = self.get_skill_context(usage_id, block, skills)
@@ -128,10 +124,6 @@ class AddVideoBlockSkillVerificationComponent(VerificationPipelineBase, Pipeline
             return {"block": block, "context": context}
         skills = self.fetch_related_skills(block)
         if not skills:
-            logger.info(
-                "[Xblock-Skill-Tagging] Skills missing for video. Block-ID: %s",
-                str(block.scope_ids.usage_id.block_id)
-            )
             return {"block": block, "context": context}
         data = self.get_skill_context(usage_id, block, skills)
 
