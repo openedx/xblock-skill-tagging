@@ -105,9 +105,15 @@ settings: ``lms/envs/common.py``
    # helps to configure probability of displaying the verification forms. Values in range 0 to 1 are allowed, where 0
    # means never and 1 means always display. Default value is 0.5 i.e. 50% chance of displaying the form.
    SHOW_SKILL_VERIFICATION_PROBABILITY = 0.5
-   # Optionally update topic name for verification event emitted when a user verifies tags for an xblock.
-   EVENT_BUS_XBLOCK_VERIFICATION_TOPIC = "learning-custom-xblock-skill-verfied"
-
+   # Include the XBLOCK_SKILL_VERIFIED signal in `EVENT_BUS_PRODUCER_CONFIG` to push the event to event bus
+   # Note: Include `openedx_events` in `INSTALLED_APPS` setting in the host application
+   # See https://docs.openedx.org/projects/openedx-events/en/latest/decisions/0014-new-event-bus-producer-config.html
+   # for more information about EVENT_BUS_PRODUCER_CONFIG
+   EVENT_BUS_PRODUCER_CONFIG = {
+       'org.openedx.learning.xblock.skill.verified.v1': {
+           'learning-xblock-skill-verfied': {'event_key_field': 'xblock_info.usage_key', 'enabled': True}
+       },
+   }
 
 Developing
 ==========
