@@ -9,6 +9,11 @@ from django.conf import settings
 from django.template import Context, Template
 from openedx_filters import PipelineStep
 
+try:
+    from edx_proctoring.models import ProctoredExam
+except ImportError:
+    ProctoredExam = None
+
 logger = logging.getLogger(__name__)
 DEFAULT_PROBABILITY = 0.03
 
@@ -34,6 +39,13 @@ class VerificationPipelineBase:
             return []
         tags = fetch_tags()
         return tags
+
+    @staticmethod
+    def is_proctored_exam(content_id):
+        """Determines whether the content is a proctored exam."""
+        if ProctoredExam:
+            return ProctoredExam.objects.filter(content_id=content_id, is_proctored=True).exists()
+        return False
 
     @staticmethod
     def should_run_filter():
@@ -81,14 +93,13 @@ class AddVerticalBlockSkillVerificationSection(VerificationPipelineBase, Pipelin
     """
     def run_filter(self, block, fragment, context, view):  # pylint: disable=arguments-differ
         """Pipeline Step implementing the Filter"""
-
+        usage_id = block.scope_ids.usage_id
         # Check whether we need to run this filter and only call the API.
-        if not self.should_run_filter():
+        if not self.should_run_filter() or self.is_proctored_exam(str(usage_id)):
             return {"block": block, "fragment": fragment, "context": context, "view": view}
         skills = self.fetch_related_skills(block)
         if not skills:
             return {"block": block, "fragment": fragment, "context": context, "view": view}
-        usage_id = block.scope_ids.usage_id
         data = self.get_skill_context(usage_id, block, skills)
         html = resource_string("static/tagging.html")
         css = resource_string("static/tagging.css")
