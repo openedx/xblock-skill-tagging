@@ -32,8 +32,6 @@ pip-log.txt
 coverage.xml
 htmlcov/
 
-
-
 # The Silver Searcher
 .agignore
 
@@ -59,3 +57,6 @@ docs/skill_tagging.*.rst
 # Private requirements
 requirements/private.in
 requirements/private.txt
+
+# IDE files
+/.idea
