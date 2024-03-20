@@ -68,7 +68,11 @@ class SkillTaggingMixin(metaclass=NamedAttributesMetaclass):
         user = user_service.get_user_by_anonymous_id()
         api_client = get_api_client(user=user)
 
+        course_key_str = str(self.scope_ids.usage_id.context_key)
         usage_id_str = str(self.scope_ids.usage_id)
+        LOGGER.info(
+            f"[XBLOCK_SKILL_TAGGING] Fetching Skills. XBlock: [{usage_id_str}], Course: [{course_key_str}]."
+        )
         XBLOCK_SKILL_TAGS_API = urljoin(
             settings.TAXONOMY_API_BASE_URL,
             '/taxonomy/api/v1/xblocks/'
@@ -76,6 +80,7 @@ class SkillTaggingMixin(metaclass=NamedAttributesMetaclass):
         response = api_client.get(
             XBLOCK_SKILL_TAGS_API,
             params={
+                "course_key": course_key_str,
                 "usage_key": usage_id_str,
                 "page_size": PAGE_SIZE,
                 "verified": False,
