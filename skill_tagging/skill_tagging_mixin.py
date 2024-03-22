@@ -70,9 +70,6 @@ class SkillTaggingMixin(metaclass=NamedAttributesMetaclass):
 
         course_key_str = str(self.scope_ids.usage_id.context_key)
         usage_id_str = str(self.scope_ids.usage_id)
-        LOGGER.info(
-            f"[XBLOCK_SKILL_TAGGING] Fetching Skills. XBlock: [{usage_id_str}], Course: [{course_key_str}]."
-        )
         XBLOCK_SKILL_TAGS_API = urljoin(
             settings.TAXONOMY_API_BASE_URL,
             '/taxonomy/api/v1/xblocks/'
