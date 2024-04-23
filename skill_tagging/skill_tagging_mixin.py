@@ -11,9 +11,8 @@ from django.utils.timezone import datetime, timezone
 from django.utils.translation import gettext as _
 from openedx_events.learning.data import XBlockSkillVerificationData
 from openedx_events.learning.signals import XBLOCK_SKILL_VERIFIED
-from xblock.core import XBlock
+from xblock.core import XBlock, XBlockMixin
 from xblock.fields import Boolean, Scope
-from xblock.internal import NamedAttributesMetaclass
 from xblock.runtime import NoSuchServiceError
 
 from .utils import get_api_client
@@ -27,7 +26,7 @@ def _(text):
     return text
 
 
-class SkillTaggingMixin(metaclass=NamedAttributesMetaclass):
+class SkillTaggingMixin(XBlockMixin):
     """
     XBlock Mixin for fetching and verifying skill tags
     """
