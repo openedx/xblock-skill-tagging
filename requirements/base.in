@@ -5,3 +5,5 @@ Django             # Web application framework
 django-model-utils        # Provides TimeStampedModel abstract base class
 openedx_events
 openedx-filters
+openedx-django-pyfs
+lazy
