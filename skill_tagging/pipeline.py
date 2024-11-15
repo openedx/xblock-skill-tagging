@@ -3,8 +3,8 @@ Module that contains the openedx_filters pipeline steps.
 """
 import logging
 import random
+from importlib.resources import files
 
-import pkg_resources
 from django.conf import settings
 from django.template import Context, Template
 from openedx_filters import PipelineStep
@@ -20,8 +20,7 @@ DEFAULT_PROBABILITY = 0.03
 
 def resource_string(path):
     """Handy helper for getting resources from our kit."""
-    data = pkg_resources.resource_string(__name__, path)
-    return data.decode("utf8")
+    return files(__package__).joinpath(path).read_text(encoding="utf-8")
 
 
 class VerificationPipelineBase:
