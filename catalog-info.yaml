@@ -12,6 +12,7 @@ metadata:
     # names that might be interested in changes to the architecture of this
     # component.
     openedx.org/arch-interest-groups: ""
+    openedx.org/release: "main"
 spec:
   owner: group:2u-xblockskilltagging-maintainers
   type: 'library'
