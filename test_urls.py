@@ -1,9 +1,10 @@
 """
 Custom URL patterns for testing
 """
-from django.urls import include, re_path
+from django.urls import path
+from django.urls import include
 
 urlpatterns = [
-    re_path(r'^', include('workbench.urls')),
+    path('', include('workbench.urls')),
 ]
 
