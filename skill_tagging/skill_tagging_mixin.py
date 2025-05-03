@@ -3,8 +3,8 @@ A mixin that fetches and verifies skills related to an Xblock,
 that can be added for all XBlocks.
 """
 
-from datetime import timezone
 import logging
+from datetime import timezone
 from urllib.parse import urljoin
 
 from django.conf import settings
