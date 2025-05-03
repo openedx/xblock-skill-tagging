@@ -3,11 +3,12 @@ A mixin that fetches and verifies skills related to an Xblock,
 that can be added for all XBlocks.
 """
 
+from datetime import timezone
 import logging
 from urllib.parse import urljoin
 
 from django.conf import settings
-from django.utils.timezone import datetime, timezone
+from django.utils.timezone import datetime
 from django.utils.translation import gettext as _
 from openedx_events.learning.data import XBlockSkillVerificationData
 from openedx_events.learning.signals import XBLOCK_SKILL_VERIFIED
