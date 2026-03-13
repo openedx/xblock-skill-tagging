@@ -21,11 +21,6 @@ LOGGER = logging.getLogger(__name__)
 PAGE_SIZE = getattr(settings, "TAXONOMY_API_SKILL_PAGE_SIZE", 100)
 
 
-# Make '_' a no-op so we can scrape strings
-def _(text):
-    return text
-
-
 class SkillTaggingMixin(XBlockMixin):
     """
     XBlock Mixin for fetching and verifying skill tags
