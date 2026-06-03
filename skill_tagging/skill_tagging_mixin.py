@@ -4,10 +4,11 @@ that can be added for all XBlocks.
 """
 
 import logging
+from datetime import timezone
 from urllib.parse import urljoin
 
 from django.conf import settings
-from django.utils.timezone import datetime, timezone
+from django.utils.timezone import datetime
 from django.utils.translation import gettext as _
 from openedx_events.learning.data import XBlockSkillVerificationData
 from openedx_events.learning.signals import XBLOCK_SKILL_VERIFIED
