@@ -42,7 +42,7 @@ build==1.4.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-certifi==2026.2.25
+certifi==2026.10.19
     # via
     #   -r requirements/quality.txt
     #   requests
