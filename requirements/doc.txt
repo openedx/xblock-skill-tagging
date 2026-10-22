@@ -41,13 +41,14 @@ botocore==1.35.58
     #   s3transfer
 build==1.2.2.post1
     # via -r requirements/doc.in
-certifi==2024.8.30
+certifi==2026.10.19
     # via
     #   -r requirements/test.txt
     #   requests
 cffi==1.17.1
     # via
     #   -r requirements/test.txt
+    #   cryptography
     #   pynacl
 chardet==5.2.0
     # via
@@ -73,6 +74,8 @@ coverage[toml]==7.6.4
     # via
     #   -r requirements/test.txt
     #   pytest-cov
+cryptography==46.0.0
+    # via secretstorage
 django==4.2.16
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
@@ -158,6 +161,10 @@ jaraco-context==6.0.1
     # via keyring
 jaraco-functools==4.1.0
     # via keyring
+jeepney==0.9.0
+    # via
+    #   keyring
+    #   secretstorage
 jinja2==3.1.4
     # via
     #   -r requirements/test.txt
@@ -314,6 +321,8 @@ s3transfer==0.10.3
     # via
     #   -r requirements/test.txt
     #   boto3
+secretstorage==3.5.0
+    # via keyring
 simplejson==3.19.3
     # via
     #   -r requirements/test.txt
