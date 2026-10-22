@@ -26,7 +26,7 @@ coverage: clean ## generate and view HTML coverage report
 	$(BROWSER)htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	uv run tox -e docs
+	tox -e docs
 	$(BROWSER)docs/_build/html/index.html
 
 upgrade: ## update uv.lock and constraints with the latest packages
@@ -34,10 +34,10 @@ upgrade: ## update uv.lock and constraints with the latest packages
 	uv run --with edx-lint edx_lint write_uv_constraints pyproject.toml
 
 quality: ## check coding style with pycodestyle and pylint
-	uv run tox -e quality
+	tox -e quality
 
 pii_check: ## check for PII annotations on all Django models
-	uv run tox -e pii_check
+	tox -e pii_check
 
 requirements: ## install development environment requirements
 	uv sync --group dev
@@ -50,8 +50,8 @@ diff_cover: test ## find diff lines that need test coverage
 	diff-cover coverage.xml
 
 test-all: quality ## run tests on every supported Python/Django combination
-	uv run tox
-	uv run tox -e docs
+	tox
+	tox -e docs
 
 validate: quality test ## run tests and quality checks
 

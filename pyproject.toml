@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "skill_tagging"
 description = "Django app plugin for fetching and verifying tags for xblock skills."
 readme = "README.rst"
-license = "AGPL-3.0"
+license = "AGPL-3.0-or-later"
 license-files = ["LICENSE.txt"]
 authors = [
     {name = "edX", email = "oscm@edx.org"},

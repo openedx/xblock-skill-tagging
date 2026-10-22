@@ -35,7 +35,7 @@ jobs:
       run: uv run tox -e ${{ matrix.toxenv }}
 
     - name: Run coverage
-      if: matrix.python-version == '3.12' && matrix.toxenv == 'django52'
+      if: matrix.python-version == '3.12' && matrix.toxenv == 'django42'
       uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
