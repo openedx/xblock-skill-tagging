@@ -6,14 +6,15 @@ that can be added for all XBlocks.
 import logging
 from urllib.parse import urljoin
 
-from django.conf import settings
-from django.utils.timezone import datetime, timezone
-from django.utils.translation import gettext as _
 from openedx_events.learning.data import XBlockSkillVerificationData
 from openedx_events.learning.signals import XBLOCK_SKILL_VERIFIED
 from xblock.core import XBlock, XBlockMixin
 from xblock.fields import Boolean, Scope
 from xblock.runtime import NoSuchServiceError
+
+from django.conf import settings
+from django.utils.timezone import datetime, timezone
+from django.utils.translation import gettext as _
 
 from .utils import get_api_client
 

@@ -2,9 +2,10 @@
 skill_tagging signal handlers
 """
 
-from django.conf import settings
 from openedx_events.event_bus import get_producer
 from openedx_events.learning.signals import XBLOCK_SKILL_VERIFIED
+
+from django.conf import settings
 
 
 def listen_for_xblock_skill_verified(**kwargs):
