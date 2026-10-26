@@ -62,11 +62,11 @@ selfcheck: ## check that the Makefile is well-formed
 
 extract_translations: ## extract strings to be translated, outputting .mo files
 	rm -rf docs/_build
-	cd src/skill_tagging && ../manage.py makemessages -l en -v1 -d django
-	cd src/skill_tagging && ../manage.py makemessages -l en -v1 -d djangojs
+	cd src/skill_tagging && python ../../manage.py makemessages -l en -v1 -d django
+	cd src/skill_tagging && python ../../manage.py makemessages -l en -v1 -d djangojs
 
 compile_translations: ## compile translation files, outputting .po files for each supported language
-	cd src/skill_tagging && ../manage.py compilemessages
+	cd src/skill_tagging && python ../../manage.py compilemessages
 
 detect_changed_source_translations:
 	cd src/skill_tagging && i18n_tool changed
