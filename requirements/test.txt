@@ -29,7 +29,7 @@ botocore==1.35.58
     #   -r requirements/base.txt
     #   boto3
     #   s3transfer
-certifi==2024.8.30
+certifi==2026.10.19
     # via requests
 cffi==1.17.1
     # via
