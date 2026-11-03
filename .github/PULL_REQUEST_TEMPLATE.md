@@ -28,7 +28,7 @@ instructions.
 
 **Post merge:**
 - [ ] Check new version is pushed to PyPI after the release workflow on
-      `main` is finished (only for `feat:`/`fix:`/breaking-change commits).
+      `main` is finished (only for `feat:`/`fix:`/`perf:`/breaking-change commits).
 - [ ] Delete working branch (if not needed anymore)
 
 **Author concerns:** List any concerns about this PR - inelegant 

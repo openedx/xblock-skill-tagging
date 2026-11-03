@@ -165,7 +165,7 @@ Deploying
 
 This package is automatically released and published to PyPI on every merge to
 ``main``, using `python-semantic-release`_. The next version is determined from the
-`conventional commit`_ types merged since the last release (``fix:`` bumps the patch
+`conventional commit`_ types merged since the last release (``fix:`` or ``perf:`` bumps the patch
 version, ``feat:`` bumps the minor version, and a breaking change bumps the major
 version). Commits of other types (e.g. ``docs:``, ``chore:``, ``build:``) do not trigger
 a release.
