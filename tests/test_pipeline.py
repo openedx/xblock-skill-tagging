@@ -3,9 +3,10 @@ Tests for pipeline.py
 """
 from unittest.mock import patch
 
-from django.test import TestCase, override_settings
 from openedx_filters.learning.filters import VerticalBlockChildRenderStarted, VerticalBlockRenderCompleted
 from workbench.runtime import Fragment
+
+from django.test import TestCase, override_settings
 
 from test_utils import TestCaseMixin
 

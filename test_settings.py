@@ -30,7 +30,7 @@ DATABASES = {
 
 
 LOCALE_PATHS = [
-    root('skill_tagging', 'conf', 'locale'),
+    root('src', 'skill_tagging', 'conf', 'locale'),
 ]
 
 ROOT_URLCONF = 'test_urls'

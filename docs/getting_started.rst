@@ -1,10 +1,15 @@
 Getting Started
 ###############
 
-If you have not already done so, create/activate a `virtualenv`_. Unless otherwise stated, assume all terminal code
-below is executed within the virtualenv.
+If you have not already done so, create and activate a virtualenv using `uv`_. Unless otherwise stated, assume all
+terminal code below is executed within the virtualenv.
 
-.. _virtualenv: https://virtualenvwrapper.readthedocs.org/en/latest/
+.. code-block:: bash
+
+    $ uv venv
+    $ source .venv/bin/activate
+
+.. _uv: https://docs.astral.sh/uv/
 
 
 Install dependencies

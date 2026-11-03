@@ -67,7 +67,7 @@ has detailed information on setting up event bus. The host would be
 ``edx-platform`` while ``course-discovery`` will be the consumer for the event
 bus.
 
-.. _emits: https://github.com/openedx/xblock-skill-tagging/blob/main/skill_tagging/handlers.py
+.. _emits: https://github.com/openedx/xblock-skill-tagging/blob/main/src/skill_tagging/handlers.py
 .. _event_bus_kafka: https://github.com/openedx/event-bus-kafka
 .. _event_bus_redis: https://github.com/openedx/event-bus-redis
 .. _How to start using the Event Bus: https://openedx.atlassian.net/wiki/spaces/AC/pages/3508699151/How+to+start+using+the+Event+Bus
@@ -120,8 +120,8 @@ One Time Setup
   git clone git@github.com:openedx/xblock-skill-tagging.git
   cd xblock-skill-tagging
 
-  # Set up a virtualenv using virtualenvwrapper with the same name as the repo and activate it
-  mkvirtualenv -p python3.12 xblock-skill-tagging
+  # Create a virtualenv in .venv using uv (https://docs.astral.sh/uv/)
+  uv venv
 
 
 Every time you develop something in this repo
@@ -129,7 +129,7 @@ Every time you develop something in this repo
 .. code-block::
 
   # Activate the virtualenv
-  workon xblock-skill-tagging
+  source .venv/bin/activate
 
   # Grab the latest code
   git checkout main
@@ -163,7 +163,15 @@ Every time you develop something in this repo
 Deploying
 =========
 
-This package is automatically published to pypi whenever a new tag is pushed to the repository.
+This package is automatically released and published to PyPI on every merge to
+``main``, using `python-semantic-release`_. The next version is determined from the
+`conventional commit`_ types merged since the last release (``fix:`` or ``perf:`` bumps the patch
+version, ``feat:`` bumps the minor version, and a breaking change bumps the major
+version). Commits of other types (e.g. ``docs:``, ``chore:``, ``build:``) do not trigger
+a release.
+
+.. _python-semantic-release: https://python-semantic-release.readthedocs.io/
+.. _conventional commit: https://www.conventionalcommits.org/
 
 Getting Help
 ************

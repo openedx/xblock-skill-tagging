@@ -5,9 +5,10 @@ import logging
 import random
 from importlib.resources import files
 
+from openedx_filters import PipelineStep
+
 from django.conf import settings
 from django.template import Context, Template
-from openedx_filters import PipelineStep
 
 try:
     from edx_proctoring.models import ProctoredExam
